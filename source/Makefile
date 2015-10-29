@@ -19,7 +19,7 @@ FFLAGS = -mkl -openmp -O3 -no-prec-div -fpp
 DEBUGFLAGS = -mkl -openmp -g -check all -check noarg_temp_created -traceback -fpp -fpe0
 #add -fpe0 to check for floating point errors (think lowLike also throws these harmlessly)
 MODOUT = -module $(OUTPUT_DIR)
-LAPACKL =
+LAPACKL = -lmkl_lapack95_lp64
 
 ifeq ($(STATIC),YES)
 #so you can re-distribute the binary to another machine
@@ -298,7 +298,8 @@ getdist: directories $(DISTFILES)
 camb:
 	cd ../camb && \
 	$(MAKE) --file=Makefile_main libcamb OUTPUT_DIR=$(OUTPUT_DIR) \
-	RECOMBINATION=$(RECOMBINATION) EQUATIONS=equations_ppf NONLINEAR=halofit_ppf
+	RECOMBINATION=$(RECOMBINATION) EQUATIONS=equations_EFT NONLINEAR=halofit_ppf
+	#RECOMBINATION=$(RECOMBINATION) EQUATIONS=equations_ppf NONLINEAR=halofit_ppf
 
 $(highL)/libhigh.a:
 	cd $(highL); make libhigh.a;

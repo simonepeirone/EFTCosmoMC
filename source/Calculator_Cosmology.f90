@@ -17,6 +17,9 @@
     Type, extends(TTheoryCalculator) :: TCosmologyCalculator
         Type(TCosmologyImportanceOptions) :: ImportanceOptions
     contains
+    ! EFTCOSMOMC MOD START: define a dummy procedure to be able to call stability check
+    procedure :: CMBToCAMB
+    ! EFTCOSMOMC MOD END.
     procedure :: BAO_D_v
     procedure :: Hofz
     procedure :: Hofz_Hunit
@@ -48,6 +51,18 @@
     this%ImportanceOptions%redo_pk= Ini%Read_Logical('redo_pk')
 
     end subroutine TCosmologyCalculator_ReadImportanceParams
+
+    ! EFTCOSMOMC MOD START: define the interface of the dummy procedure
+    subroutine CMBToCAMB(this,CMB,P)
+    use CAMB, only: CAMBparams
+    class(TCosmologyCalculator) :: this
+    class(CMBParams) :: CMB
+    type(CAMBParams)  P
+
+    call this%ErrorNotImplemented('CMBToCAMB')
+
+    end subroutine CMBToCAMB
+    ! EFTCOSMOMC MOD END.
 
     subroutine GetNewBackgroundData(this, CMB,Theory,error)
     class(TCosmologyCalculator) :: this
