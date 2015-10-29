@@ -1,0 +1,1219 @@
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.7794
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3819
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelOmega   =  1
+ EFTCAMB parameters:
+   EFTOmega0    =     0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelOmega   =  1
+ EFTCAMB parameters:
+   EFTOmega0    =     0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.6613
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3055
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma1  =  1
+ EFTCAMB parameters:
+   EFTGamma10   =     1.000000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma1  =  1
+ EFTCAMB parameters:
+   EFTGamma10   =     1.000000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.7794
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3819
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma2  =  1
+ EFTCAMB parameters:
+   EFTGamma20   =    -0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma2  =  1
+ EFTCAMB parameters:
+   EFTGamma20   =    -0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.7916
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3966
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma3  =  1
+ EFTCAMB parameters:
+   EFTGamma30   =     0.001000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.584893192461114E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.594893192302625E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999999900000     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.750075011461794     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  3.167759784223680E-003
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.996832256064708     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.250025014386553     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  4.748991862030699E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.500050012924174     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.002736948136852E-005
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999989988479451     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999968359013     
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma4  =  1
+ EFTCAMB parameters:
+   EFTGamma40   =     0.010000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.500050012924174     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.002736948136852E-005
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999989988479451     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.250025014386553     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  4.748991862030699E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999968359013     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.584893192461114E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.594893192302625E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999999900000     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.750075011461794     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  3.167759784223680E-003
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.996832256064708     
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma5  =  1
+ EFTCAMB parameters:
+   EFTGamma50   =    -1.000000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB new stability: gradient instability. Gradient:  -1.102471239807112E-005
+ EFTCAMB: instability detected at a=  0.250025014386553     
+ EFTCAMB new stability: gradient instability. Gradient:  -6.130675605521603E-006
+ EFTCAMB: instability detected at a=  0.500050012924174     
+ EFTCAMB new stability: gradient instability. Gradient:   -10.2681164859526     
+ EFTCAMB: instability detected at a=  1.002736948136852E-005
+ EFTCAMB new stability: gradient instability. Gradient:  -5.551396575559430E-006
+ EFTCAMB: instability detected at a=  0.999989988479451     
+ EFTCAMB new stability: gradient instability. Gradient:   -4002774.81959296     
+ EFTCAMB: instability detected at a=  1.584893192461114E-008
+ EFTCAMB new stability: gradient instability. Gradient:   -3952738.34641981     
+ EFTCAMB: instability detected at a=  1.594893192302625E-008
+ EFTCAMB new stability: gradient instability. Gradient:  -5.551426346325319E-006
+ EFTCAMB: instability detected at a=  0.999999999900000     
+ EFTCAMB new stability: gradient instability. Gradient:   -445856.548095455     
+ EFTCAMB: instability detected at a=  4.748991862030699E-008
+ EFTCAMB new stability: gradient instability. Gradient:  -5.551426252530755E-006
+ EFTCAMB: instability detected at a=  0.999999968359013     
+ EFTCAMB new stability: gradient instability. Gradient:  -5.211530300179942E-006
+ EFTCAMB: instability detected at a=  0.750075011461794     
+ EFTCAMB new stability: gradient instability. Gradient:  -9.519310933523364E-004
+ EFTCAMB: instability detected at a=  3.167759784223680E-003
+ EFTCAMB new stability: gradient instability. Gradient:  -5.542062122500715E-006
+ EFTCAMB: instability detected at a=  0.996832256064708     
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  1
+   w_DE                =  0
+   PureEFTmodelGamma6  =  1
+ EFTCAMB parameters:
+   EFTGamma60   =     0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.584893192461114E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.594893192302625E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999999900000     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.250025014386553     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.750075011461794     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  3.167759784223680E-003
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.996832256064708     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  4.748991862030699E-008
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999999968359013     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.500050012924174     
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  1.002736948136852E-005
+ EFTCAMB WARNING: stability for model beyond GLPV has not been worked out.
+ It will be added in a future release.
+ If you want to run this model disable EFT_physical_stability.
+ EFTCAMB: instability detected at a=  0.999989988479451     
+Reion redshift       =  10.904
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.080898
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  1
+   DesignerEFTmodel    =  2
+ EFTCAMB parameters:
+   EFTw0        = -0.700000
+ EFTCAMB: calling designer code
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  12.955
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.081220
+DA(zstar)/Gpc        =  13.53885
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.166649
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.881472
+100*theta_rs_EQ      =  0.485689
+tau_recomb/Mpc       =  284.94  tau_now/Mpc =  13823.5
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  1
+   DesignerEFTmodel    =  2
+ EFTCAMB parameters:
+   EFTw0        = -0.700000
+ EFTCAMB: calling designer code
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.97  tau_now/Mpc =  13823.5
+at z =  0.000 sigma8 (all matter) =  0.6908
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3334
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  0
+   DesignerEFTmodel    =  1
+ EFTCAMB parameters:
+   F(R) B0      =     1.000000
+ EFTCAMB: calling designer code
+ f(R) designer: horizontal asymptote =  -5.67164808111730     
+ f(R) designer: vertical asymptote =  0.542467638878194     
+ f(R) designer: initial condition A =  8.130939059863833E-002
+ f(R) designer: B0 found=   1.00000000000001      B0 given= 
+   1.00000000000000     
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002  4.014905832601341E-002   1.10000000000000     
+   1.10000000000000       1.450602026662317E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  0
+   DesignerEFTmodel    =  1
+ EFTCAMB parameters:
+   F(R) B0      =     1.000000
+ EFTCAMB: calling designer code
+ f(R) designer: horizontal asymptote =  -5.67164808111730     
+ f(R) designer: vertical asymptote =  0.542467638878194     
+ f(R) designer: initial condition A =  8.130939059863833E-002
+ f(R) designer: B0 found=   1.00000000000001      B0 given= 
+   1.00000000000000     
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002  4.014905832601341E-002   1.10000000000000     
+   1.10000000000000       1.450602026662317E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  1.1913
+at z =  0.000 sigma8^2_vd/sigma8  =  0.7237
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  0
+   DesignerEFTmodel    =  1
+ EFTCAMB parameters:
+   F(R) B0      =     0.000100
+ EFTCAMB: calling designer code
+ f(R) designer: horizontal asymptote =  -5.67164808111730     
+ f(R) designer: vertical asymptote =  0.542467638878194     
+ f(R) designer: initial condition A =  9.564537968102857E-006
+ f(R) designer: B0 found=  9.999999999709532E-005 B0 given= 
+  1.000000000000000E-004
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  9.398261251633425E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  9.398261251633425E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  2
+   w_DE                =  0
+   DesignerEFTmodel    =  1
+ EFTCAMB parameters:
+   F(R) B0      =     0.000100
+ EFTCAMB: calling designer code
+ f(R) designer: horizontal asymptote =  -5.67164808111730     
+ f(R) designer: vertical asymptote =  0.542467638878194     
+ f(R) designer: initial condition A =  9.564537968102857E-006
+ f(R) designer: B0 found=  9.999999999709532E-005 B0 given= 
+  1.000000000000000E-004
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  9.398261251633425E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  9.398261251633425E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.8284
+at z =  0.000 sigma8^2_vd/sigma8  =  0.4562
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  3
+   AltParEFTmodel      =  1
+   RPHmassPmodel       =  1
+   RPHbraidingmodel    =  1
+ EFTCAMB parameters:
+   RPHmassP0        =     0.100000
+   RPHbraiding0     =    -0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  3
+   AltParEFTmodel      =  1
+   RPHmassPmodel       =  1
+   RPHbraidingmodel    =  1
+ EFTCAMB parameters:
+   RPHmassP0        =     0.100000
+   RPHbraiding0     =    -0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.8332
+at z =  0.000 sigma8^2_vd/sigma8  =  0.4122
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  3
+   AltParEFTmodel      =  1
+   RPHmassPmodel       =  1
+   RPHkineticitymodel  =  1
+ EFTCAMB parameters:
+   RPHmassP0        =     0.100000
+   RPHkineticity0   =     0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  3
+   AltParEFTmodel      =  1
+   RPHmassPmodel       =  1
+   RPHkineticitymodel  =  1
+ EFTCAMB parameters:
+   RPHmassP0        =     0.100000
+   RPHkineticity0   =     0.100000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.6613
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3055
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039547
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Solar System Horava
+   Horava_xi        =     0.000050
+   Horava_lambda    =     0.000100
+   Horava_eta       =     0.000100
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.778
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.40
+100*theta            =  1.039857
+DA(zstar)/Gpc        =  14.07846
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.02
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009816
+100*theta_EQ         =  0.847750
+100*theta_rs_EQ      =  0.467108
+tau_recomb/Mpc       =  284.96  tau_now/Mpc =  14363.2
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Solar System Horava
+   Horava_xi        =     0.000050
+   Horava_lambda    =     0.000100
+   Horava_eta       =     0.000100
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  285.00  tau_now/Mpc =  14363.2
+at z =  0.000 sigma8 (all matter) =  0.1789
+at z =  0.000 sigma8^2_vd/sigma8  =  0.0472
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039545
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Horava_xi        =    -0.000010
+   Horava_lambda    =     0.000010
+   Horava_eta       =     0.000210
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.778
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.39
+100*theta            =  1.039855
+DA(zstar)/Gpc        =  14.07835
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.02
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847748
+100*theta_rs_EQ      =  0.467107
+tau_recomb/Mpc       =  284.96  tau_now/Mpc =  14363.0
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Horava_xi        =    -0.000010
+   Horava_lambda    =     0.000010
+   Horava_eta       =     0.000210
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+  1.000000000000000E-002   1.10000000000000       1.000000000000000E-002
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+  1.000000000000000E-002   1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  284.99  tau_now/Mpc =  14363.0
+at z =  0.000 sigma8 (all matter) =  0.4423
+at z =  0.000 sigma8^2_vd/sigma8  =  0.1570
+Reion redshift       =  10.225
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.054257
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Horava_xi        =     0.000000
+   Horava_lambda    =     0.100000
+   Horava_eta       =     0.000000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  14.313
+zstar                =  1086.66
+r_s(zstar)/Mpc       =  157.18
+100*theta            =  1.055920
+DA(zstar)/Gpc        =  14.88527
+zdrag                =  1058.03
+r_s(zdrag)/Mpc       =  159.96
+k_D(zstar) Mpc       =  0.1319
+100*theta_D          =  0.160032
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009155
+100*theta_EQ         =  0.859771
+100*theta_rs_EQ      =  0.473731
+tau_recomb/Mpc       =  305.86  tau_now/Mpc =  15191.0
+ EFTCAMB initialization
+ 
+ EFTCAMB stability flags:
+  Mathematical stability =  F
+  Physical stability     =  T
+  Additional priors      =  T
+  Minkowsky priors       =  T
+ 
+ EFTCAMB model flags:
+   EFTflag             =  4
+   FullMappingEFTmodel =  1
+ EFTCAMB parameters:
+   Horava_xi        =     0.000000
+   Horava_lambda    =     0.100000
+   Horava_eta       =     0.000000
+ EFTCAMB: checking stability of the theory
+ EFTCAMB: checking return to GR
+ EFTCAMB: RGR times
+   1.10000000000000        1.10000000000000       1.000000000000000E-002
+  1.000000000000000E-002  1.000000000000000E-002  1.000000000000000E-002
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000       1.000000000000000E-002   1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+   1.10000000000000        1.10000000000000        1.10000000000000     
+ RGR: a=  1.000000000000000E-002
+tau_recomb/Mpc       =  305.84  tau_now/Mpc =  15191.0
+at z =  0.000 sigma8 (all matter) =  0.5653
+at z =  0.000 sigma8^2_vd/sigma8  =  0.2943
+Reion redshift       =  10.714
+Integrated opt depth =  0.0900
+Om_b h^2             =  0.022600
+Om_c h^2             =  0.112000
+Om_nu h^2            =  0.000640
+Om_Lambda            =  0.724000
+Om_K                 =  0.000000
+Om_m (1-Om_K-Om_L)   =  0.276000
+100 theta (CosmoMC)  =  1.039532
+N_eff (total)        =  3.046000
+ 1 nu, g= 1.0153 m_nu*c^2/k_B/T_nu0=    353.71 (m_nu=  0.060 eV)
+Reion opt depth      =  0.0900
+Age of universe/GYr  =  13.777
+zstar                =  1088.72
+r_s(zstar)/Mpc       =  146.38
+100*theta            =  1.039840
+DA(zstar)/Gpc        =  14.07762
+zdrag                =  1059.70
+r_s(zdrag)/Mpc       =  149.01
+k_D(zstar) Mpc       =  0.1392
+100*theta_D          =  0.160271
+z_EQ (if v_nu=1)     =  3216.47
+k_EQ Mpc (if v_nu=1) =  0.009817
+100*theta_EQ         =  0.847737
+100*theta_rs_EQ      =  0.467101
+tau_recomb/Mpc       =  284.95  tau_now/Mpc =  14362.3
+tau_recomb/Mpc       =  284.72  tau_now/Mpc =  14362.3
+at z =  0.000 sigma8 (all matter) =  0.7794
+at z =  0.000 sigma8^2_vd/sigma8  =  0.3819
