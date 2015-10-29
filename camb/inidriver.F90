@@ -17,6 +17,11 @@
 #ifdef NAGF95
     use F90_UNIX
 #endif
+
+! EFTCAMB MOD START
+        use EFTdef
+! EFTCAMB MOD END
+
     implicit none
 
     Type(CAMBparams) P
@@ -117,6 +122,88 @@
     end if
 
     P%tcmb   = Ini_Read_Double('temp_cmb',COBE_CMBTemp)
+
+! EFTCAMB MOD START
+
+    ! 1) Initialization of EFTCAMB flags.
+
+         P%EFTflag = Ini_Read_Int('EFTflag',0)
+
+         P%PureEFTmodelOmega  = Ini_Read_Int('PureEFTmodelOmega',0)
+         P%PureEFTmodelGamma1 = Ini_Read_Int('PureEFTmodelGamma1',0)
+         P%PureEFTmodelGamma2 = Ini_Read_Int('PureEFTmodelGamma2',0)
+         P%PureEFTmodelGamma3 = Ini_Read_Int('PureEFTmodelGamma3',0)
+         P%PureEFTmodelGamma4 = Ini_Read_Int('PureEFTmodelGamma4',0)
+         P%PureEFTmodelGamma5 = Ini_Read_Int('PureEFTmodelGamma5',0)
+         P%PureEFTmodelGamma6 = Ini_Read_Int('PureEFTmodelGamma6',0)
+
+         P%DesignerEFTmodel = Ini_Read_Int('DesignerEFTmodel',1)
+         P%AltParEFTmodel   = Ini_Read_Int('AltParEFTmodel',1)
+         P%FullMappingEFTmodel = Ini_Read_Int('FullMappingEFTmodel',1)
+
+    ! 2) Initialization of EFTCAMB model properties flags.
+
+         ! read the DE eos model selection flag:
+         P%EFTwDE = Ini_Read_Int('EFTwDE',0)
+         ! read pure EFT Horndeski model selection flag:
+         P%PureEFTHorndeski = Ini_Read_Logical('PureEFTHorndeski',.false.)
+         ! read RPH model selection flags:
+         P%RPHmassPmodel      = Ini_Read_Int('RPHmassPmodel',0)
+         P%RPHkineticitymodel = Ini_Read_Int('RPHkineticitymodel',0)
+         P%RPHbraidingmodel   = Ini_Read_Int('RPHbraidingmodel',0)
+         P%RPHtensormodel     = Ini_Read_Int('RPHtensormodel',0)
+         ! read the Horava Solar System Free flag:
+         P%HoravaSolarSystem  = Ini_Read_Logical('HoravaSolarSystem',.false.)
+
+    ! 3) Initialization of EFTCAMB stability flags:
+
+         P%EFT_mathematical_stability = Ini_Read_Logical('EFT_mathematical_stability',.true.)
+         P%EFT_physical_stability     = Ini_Read_Logical('EFT_physical_stability',.true.)
+         P%EFTAdditionalPriors        = Ini_Read_Logical('EFTAdditionalPriors',.true.)
+         P%MinkowskyPriors            = Ini_Read_Logical('MinkowskyPriors',.true.)
+
+    ! 4) Initialization of EFTCAMB model parameters.
+
+         ! read the DE eos parameters:
+         P%EFTw0  = Ini_Read_Double('EFTw0',-1._dl)
+         P%EFTwa  = Ini_Read_Double('EFTwa',0._dl)
+         P%EFTwn  = Ini_Read_Double('EFTwn',2._dl)
+         P%EFTwat = Ini_Read_Double('EFTwat',1._dl)
+         P%EFtw2  = Ini_Read_Double('EFtw2',0._dl)
+         P%EFTw3  = Ini_Read_Double('EFTw3',0._dl)
+         ! read pure EFT parameters:
+         P%EFTOmega0    = Ini_Read_Double('EFTOmega0', 0.0_dl)
+         P%EFTOmegaExp  = Ini_Read_Double('EFTOmegaExp', 0.0_dl)
+         P%EFTGamma10   = Ini_Read_Double('EFTGamma10', 0.0_dl)
+         P%EFTGamma1Exp = Ini_Read_Double('EFTGamma1Exp', 0.0_dl)
+         P%EFTGamma20   = Ini_Read_Double('EFTGamma20', 0.0_dl)
+         P%EFTGamma2Exp = Ini_Read_Double('EFTGamma2Exp', 0.0_dl)
+         P%EFTGamma30   = Ini_Read_Double('EFTGamma30', 0.0_dl)
+         P%EFTGamma3Exp = Ini_Read_Double('EFTGamma3Exp', 0.0_dl)
+         P%EFTGamma40   = Ini_Read_Double('EFTGamma40', 0.0_dl)
+         P%EFTGamma4Exp = Ini_Read_Double('EFTGamma4Exp', 0.0_dl)
+         P%EFTGamma50   = Ini_Read_Double('EFTGamma50', 0.0_dl)
+         P%EFTGamma5Exp = Ini_Read_Double('EFTGamma5Exp', 0.0_dl)
+         P%EFTGamma60   = Ini_Read_Double('EFTGamma60', 0.0_dl)
+         P%EFTGamma6Exp = Ini_Read_Double('EFTGamma6Exp', 0.0_dl)
+         ! read f(R) parameters:
+         P%EFTB0 = Ini_Read_Double('EFTB0', 0.0_dl)
+         ! read RPH parameters:
+         P%RPHmassP0        = Ini_Read_Double('RPHmassP0', 0.0_dl)
+         P%RPHmassPexp      = Ini_Read_Double('RPHmassPexp', 0.0_dl)
+         P%RPHkineticity0   = Ini_Read_Double('RPHkineticity0', 0.0_dl)
+         P%RPHkineticityexp = Ini_Read_Double('RPHkineticityexp', 0.0_dl)
+         P%RPHbraiding0     = Ini_Read_Double('RPHbraiding0', 0.0_dl)
+         P%RPHbraidingexp   = Ini_Read_Double('RPHbraidingexp', 0.0_dl)
+         P%RPHtensor0       = Ini_Read_Double('RPHtensor0', 0.0_dl)
+         P%RPHtensorexp     = Ini_Read_Double('RPHtensorexp', 0.0_dl)
+         ! read Horava parameters:
+         P%Horava_xi      = Ini_Read_Double('Horava_xi', 0.0_dl)
+         P%Horava_lambda  = Ini_Read_Double('Horava_lambda', 0.0_dl)
+         P%Horava_eta     = Ini_Read_Double('Horava_eta', 0.0_dl)
+
+! EFTCAMB MOD END
+
     P%yhe    = Ini_Read_Double('helium_fraction',0.24_dl)
     P%Num_Nu_massless  = Ini_Read_Double('massless_neutrinos')
 

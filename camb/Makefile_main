@@ -1,6 +1,6 @@
 
 #Files containing evolution equations initial power spectrum module
-EQUATIONS     ?= equations
+EQUATIONS     ?= equations_EFT
 POWERSPECTRUM ?= power_tilt
 REIONIZATION ?= reionization
 RECOMBINATION ?= recfast
@@ -16,6 +16,10 @@ DRIVER        ?= inidriver.F90
 #DRIVER       ?= sigma8.f90
 #DRIVER       ?= tester.f90
 
+# EFTCAMB: code to test stability of different EFT models
+EFT_STAB_DRIVER       ?= EFT_stabilitySpace.f90
+#
+
 Release: OUTPUT_DIR = Release
 Debug: OUTPUT_DIR = Debug
 OUTPUT_DIR ?= Release
@@ -30,11 +34,20 @@ F90FLAGS += $(MODOUT) $(IFLAG)$(OUTPUT_DIR)/
 
 HEALPIXLD     = -L$(HEALPIXDIR)/lib -lhealpix -L$(FITSDIR) -l$(FITSLIB)
 
+# EFTCAMB MOD START
+EFT_OBJ       =  $(OUTPUT_DIR)/EFT_def.o  $(OUTPUT_DIR)/EFT_designer.o  $(OUTPUT_DIR)/EFT_Horndeski.o  $(OUTPUT_DIR)/EFT_functions.o $(OUTPUT_DIR)/EFT_main.o
+
 CAMBOBJ       =  $(OUTPUT_DIR)/constants.o  $(OUTPUT_DIR)/utils.o $(EXTCAMBFILES)  $(OUTPUT_DIR)/subroutines.o  \
 	$(OUTPUT_DIR)/inifile.o  $(OUTPUT_DIR)/$(POWERSPECTRUM).o  $(OUTPUT_DIR)/$(RECOMBINATION).o \
-	$(OUTPUT_DIR)/$(REIONIZATION).o $(OUTPUT_DIR)/modules.o $(OUTPUT_DIR)/bessels.o $(OUTPUT_DIR)/$(EQUATIONS).o \
+	$(OUTPUT_DIR)/$(REIONIZATION).o $(OUTPUT_DIR)/modules.o $(OUTPUT_DIR)/bessels.o $(EFT_OBJ) $(OUTPUT_DIR)/$(EQUATIONS).o \
 	$(OUTPUT_DIR)/$(NONLINEAR).o $(OUTPUT_DIR)/lensing.o $(OUTPUT_DIR)/$(BISPECTRUM).o $(OUTPUT_DIR)/cmbmain.o \
 	$(OUTPUT_DIR)/camb.o
+
+EFTCAMB_STAB_OBJ = $(OUTPUT_DIR)/constants.o $(OUTPUT_DIR)/utils.o $(EXTCAMBFILES) $(OUTPUT_DIR)/subroutines.o $(OUTPUT_DIR)/inifile.o \
+	$(OUTPUT_DIR)/$(POWERSPECTRUM).o $(OUTPUT_DIR)/$(RECOMBINATION).o \
+	$(OUTPUT_DIR)/$(REIONIZATION).o $(OUTPUT_DIR)/modules.o $(OUTPUT_DIR)/bessels.o $(EFT_OBJ) $(OUTPUT_DIR)/$(EQUATIONS).o \
+	$(OUTPUT_DIR)/$(NONLINEAR).o $(OUTPUT_DIR)/lensing.o $(OUTPUT_DIR)/$(BISPECTRUM).o $(OUTPUT_DIR)/cmbmain.o $(OUTPUT_DIR)/camb.o
+
 
 F90CRLINK ?= -lstdc++
 
@@ -57,7 +70,14 @@ endif
 
 default: camb
 
-all: camb libcamb
+#all: camb libcamb
+
+# EFTCAMB MOD START: compile also the stability driver
+all: camb libcamb eftstability
+#all: camb $(CAMBLIB) eftstability
+# Original code:
+#all: camb $(CAMBLIB)
+# EFTCAMB MOD END
 
 libcamb: $(CAMBLIB)
 
@@ -77,6 +97,12 @@ $(OUTPUT_DIR)/camb.o: $(OUTPUT_DIR)/cmbmain.o
 $(OUTPUT_DIR)/Matrix_utils.o: $(OUTPUT_DIR)/utils.o
 camb: directories $(CAMBOBJ) $(DRIVER)
 	$(F90C) $(F90FLAGS) $(CAMBOBJ) $(DRIVER) $(F90CRLINK) -o $@
+
+# EFTCAMB MOD START: the stability driver
+eftstability: directories $(EFTCAMB_STAB_OBJ) $(EFT_STAB_DRIVER)
+	$(F90C) $(F90FLAGS) $(EFTCAMB_STAB_OBJ) $(EFT_STAB_DRIVER) $(F90CRLINK) -o $@
+
+# EFTCAMB MOD END
 
 $(CAMBLIB): directories $(CAMBOBJ)
 	ar -r $@ $(CAMBOBJ)

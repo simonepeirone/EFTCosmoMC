@@ -64,6 +64,11 @@
     use MassiveNu
     use InitialPower
     use Errors
+
+    ! EFTCAMB MOD START
+    use EFTinitialization
+    ! EFTCAMB MOD END
+
     implicit none
     private
 
@@ -114,7 +119,11 @@
 
     integer :: l_smooth_sample = 3000 !assume transfer functions effectively small for k>2*l_smooth_sample
 
-    real(dl) :: fixq = 0._dl !Debug output of one q
+    ! EFTCAMB MOD START:
+    !    To debug the code it should be launched on just one thread by
+    !    changing the appropriate entry in the parameter file.
+    real(dl) :: fixq = 0.0_dl !Debug output of one q
+    ! EFTCAMB MOD END.
 
     real(dl) :: ALens = 1._dl
 
@@ -127,11 +136,21 @@
 
     subroutine cmbmain
     integer q_ix
+        ! EFTCAMB MOD START
+        logical EFTsuccess
+        ! EFTCAMB MOD END
     type(EvolutionVars) EV
     !     Timing variables for testing purposes. Used if DebugMsgs=.true. in ModelParams
     real(sp) actual,timeprev,starttime
 
     WantLateTime =  CP%DoLensing .or. num_redshiftwindows > 0
+
+        ! EFTCAMB MOD START
+        if (EFTCAMBuseinCOSMOMC==1.and.CP%EFTflag/=0) then
+            call EFTCAMB_initialization(EFTsuccess)
+            if (.not.EFTsuccess) stop
+        end if
+        ! EFTCAMB MOD END
 
     if (CP%WantCls) then
         if (CP%WantTensors .and. CP%WantScalars) stop 'CMBMAIN cannot generate tensors and scalars'
@@ -232,6 +251,8 @@
 
     if (CP%WantTransfer .and. .not. CP%OnlyTransfers .and. global_error_flag==0) &
     call Transfer_Get_sigmas(MT)
+    !call Transfer_Get_sigma8(MT,8._dl)
+    !Can call with other arguments if need different size
 
     !     if CMB calculations are requested, calculate the Cl by
     !     integrating the sources over time and over k.
@@ -669,6 +690,7 @@
     EV%q2=EV%q**2
 
     EV%q_ix = q_ix
+
     EV%TransferOnly=.false.
 
     taustart = GetTauStart(EV%q)
@@ -937,24 +959,71 @@
     tau=taustart
     ind=1
 
-    !!Example code for plotting out variable evolution
-    if (fixq/=0._dl) then
-        tol1=tol/exp(AccuracyBoost-1)
-        call CreateTxtFile('evolve_q005.txt',1)
-        do j=1,1000
-            tauend = taustart+(j-1)*(CP%tau0-taustart)/1000
-            call GaugeInterface_EvolveScal(EV,tau,y,tauend,tol1,ind,c,w)
-            yprime = 0
-            call derivs(EV,EV%ScalEqsToPropagate,tau,y,yprime)
-            adotoa = 1/(y(1)*dtauda(y(1)))
-            ddelta= (yprime(3)*grhoc+yprime(4)*grhob)/(grhob+grhoc)
-            delta=(grhoc*y(3)+grhob*y(4))/(grhob+grhoc)
-            growth= ddelta/delta/adotoa
-            write (1,'(7E15.5)') tau, delta, growth, y(3), y(4), y(EV%g_ix), y(1)
-        end do
-        close(1)
-        stop
-    end if
+        ! EFTCAMB MOD START: It's always nice to plot the evolution of perturbations in DE/MG models!
+        ! In order to print the user needs to choose the scale by means of fixq and then turno on the
+        ! flag that prints quantities from the output routine.
+        ! It is suggested to run the code on just one core.
+
+        if (fixq/=0._dl) then
+            tol1=tol/exp(AccuracyBoost-1)
+
+            write(*,*) 'EFTCAMB: start printing.'
+            call CreateTxtFile('Results/Debug_Evolution/Files/1_FRW.dat',1)
+            call CreateTxtFile('Results/Debug_Evolution/Files/2_EFTfunctions.dat',2)
+            call CreateTxtFile('Results/Debug_Evolution/Files/3_EFTBackground.dat',3)
+            call CreateTxtFile('Results/Debug_Evolution/Files/4_PiFieldSolution.dat',4)
+            call CreateTxtFile('Results/Debug_Evolution/Files/5_MetricSolution.dat',5)
+            call CreateTxtFile('Results/Debug_Evolution/Files/6_DensitySolution.dat',6)
+            call CreateTxtFile('Results/Debug_Evolution/Files/7_EinsteinEqFactors.dat',7)
+            call CreateTxtFile('Results/Debug_Evolution/Files/8_PiEqFactors.dat',8)
+            call CreateTxtFile('Results/Debug_Evolution/Files/9_Sources.dat',9)
+            call CreateTxtFile('Results/Debug_Evolution/Files/10_MuGamma.dat',10)
+
+            call CreateTxtFile('Results/Debug_File/Debug.dat',11)
+
+            do j=1,10000
+                tauend = taustart +REAL(j-1)*(CP%tau0-taustart)/REAL(10000-1)
+                call GaugeInterface_EvolveScal(EV,tau,y,tauend,tol1,ind,c,w)
+                yprime = 0
+                call derivs(EV,EV%ScalEqsToPropagate,tau,y,yprime)
+                call output(EV,y,j,tau,sources)
+            end do
+
+            close(1)
+            close(2)
+            close(3)
+            close(4)
+            close(5)
+            close(6)
+            close(7)
+            close(8)
+            close(9)
+            close(10)
+            close(11)
+            write(*,*) 'Stop printing'
+            stop
+        end if
+
+        ! Original code:
+        !!Example code for plotting out variable evolution
+        !!if (fixq/=0._dl) then
+        !!    tol1=tol/exp(AccuracyBoost-1)
+        !!    call CreateTxtFile('evolve_q005.txt',1)
+        !!    do j=1,1000
+        !!        tauend = taustart+(j-1)*(CP%tau0-taustart)/1000
+        !!        call GaugeInterface_EvolveScal(EV,tau,y,tauend,tol1,ind,c,w)
+        !!        yprime = 0
+        !!        call derivs(EV,EV%ScalEqsToPropagate,tau,y,yprime)
+        !!        adotoa = 1/(y(1)*dtauda(y(1)))
+        !!        ddelta= (yprime(3)*grhoc+yprime(4)*grhob)/(grhob+grhoc)
+        !!        delta=(grhoc*y(3)+grhob*y(4))/(grhob+grhoc)
+        !!        growth= ddelta/delta/adotoa
+        !!        write (1,'(7E15.5)') tau, delta, growth, y(3), y(4), y(EV%g_ix), y(1)
+        !!    end do
+        !!    close(1)
+        !!    stop
+        !!end if
+        ! EFTCAMB MOD END
 
     !     Begin timestep loop.
 
@@ -1121,7 +1190,17 @@
     real(dl) atol
 
     atol=tol/exp(AccuracyBoost-1)
-    if (CP%Transfer%high_precision) atol=atol/10000
+
+        ! EFTCAMB MOD START: this seems to create some problems. It should be safe to turn it off.
+        if (CP%EFTflag/=0) then
+            if (CP%Transfer%high_precision) atol=atol
+        else
+            if (CP%Transfer%high_precision) atol=atol/10000
+        end if
+
+        ! Original code:
+        ! if (CP%Transfer%high_precision) atol=atol/10000
+        ! EFTCAMB MOD END.
 
     ind=1
     call initial(EV,y, tau)

@@ -2,13 +2,13 @@
 module Reionization
  use Precision
  use AMLutils
- implicit none  
+ implicit none
 
 !This module puts smooth tanh reionization of specified mid-point (z_{re}) and width
 !The tanh function is in the variable (1+z)**Rionization_zexp
 
-!Rionization_zexp=1.5 has the property that for the same z_{re} 
-!the optical depth agrees with infinitely sharp model for matter domination 
+!Rionization_zexp=1.5 has the property that for the same z_{re}
+!the optical depth agrees with infinitely sharp model for matter domination
 !So tau and zre can be mapped into each other easily (for any symmetric window)
 !However for generality the module maps tau into z_{re} using a binary search
 !so could be easily modified for other monatonic parameterizations.
@@ -20,9 +20,9 @@ module Reionization
 
        character(LEN=*), parameter :: Reionization_Name = 'CAMB_reionization'
 
-       real(dl), parameter :: Reionization_DefFraction = -1._dl 
+       real(dl), parameter :: Reionization_DefFraction = -1._dl
         !if -1 set from YHe assuming Hydrogen and first ionization of Helium follow each other
-       
+
        real(dl) :: Reionization_AccuracyBoost = 1._dl
        real(dl) :: Rionization_zexp = 1.5_dl
 
@@ -30,19 +30,19 @@ module Reionization
        real(dl) :: helium_fullreion_redshift  = 3.5_dl
        real(dl) :: helium_fullreion_deltaredshift  = 0.5
        real(dl) :: helium_fullreion_redshiftstart  = 5._dl
-       
-       
+
+
        type ReionizationParams
              logical    :: Reionization
              logical    :: use_optical_depth
              real(dl)   :: redshift, delta_redshift, fraction
              real(dl)   :: optical_depth
         end type ReionizationParams
-  
+
         type ReionizationHistory
-!These two are used by main code to bound region where xe changing 
+!These two are used by main code to bound region where xe changing
           real(dl) :: tau_start, tau_complete
-!This is set from main code          
+!This is set from main code
           real(dl) :: akthom, fHe
 
 !The rest are internal to this module.
@@ -50,7 +50,12 @@ module Reionization
 
         end type ReionizationHistory
 
-      real(dl), parameter :: Reionization_maxz = 50._dl
+      ! EFTCAMB MOD START: increase max reionization redshift
+      real(dl), parameter :: Reionization_maxz = 1000._dl
+      ! Original code:
+      ! real(dl), parameter :: Reionization_maxz = 50._dl
+      ! EFTCAMB MOD END
+
       real(dl), private, parameter :: Reionization_tol = 1d-5
 
       real(dl), private, external :: dtauda, rombint,rombint2
@@ -60,7 +65,7 @@ module Reionization
 
 contains
 
- 
+
  function Reionization_xe(a, tau, xe_recomb)
  !a and time tau and redundant, both provided for convenience
  !xe_recomb is xe(tau_start) from recombination (typically very small, ~2e-4)
@@ -70,13 +75,13 @@ contains
   real(dl) Reionization_xe
   real(dl) tgh, xod
   real(dl) xstart
-  
+
         if (present(xe_recomb)) then
         xstart = xe_recomb
         else
         xstart = 0._dl
         end if
-        
+
         xod = (ThisReionHist%WindowVarMid - 1._dl/a**Rionization_zexp)/ThisReionHist%WindowVarDelta
         if (xod > 100) then
             tgh=1.d0
@@ -84,9 +89,9 @@ contains
             tgh=tanh(xod)
         end if
         Reionization_xe =(ThisReion%fraction-xstart)*(tgh+1._dl)/2._dl+xstart
-     
+
         if (include_helium_fullreion .and. a > (1/(1+ helium_fullreion_redshiftstart))) then
-        
+
          !Effect of Helium becoming fully ionized at z <~ 3.5 is very small so details not important
           xod = (1+helium_fullreion_redshift - 1._dl/a)/helium_fullreion_deltaredshift
           if (xod > 100) then
@@ -94,24 +99,24 @@ contains
           else
              tgh=tanh(xod)
           end if
-      
+
         Reionization_xe =  Reionization_xe + ThisReionHist%fHe*(tgh+1._dl)/2._dl
-  
+
        end if
-      
- end function Reionization_xe  
- 
+
+ end function Reionization_xe
+
  function Reionization_timesteps(ReionHist)
  !minimum number of time steps to use between tau_start and tau_complete
  !Scaled by AccuracyBoost later
  !steps may be set smaller than this anyway
   Type(ReionizationHistory) :: ReionHist
   integer Reionization_timesteps
-  
-  Reionization_timesteps = 50 
-  
+
+  Reionization_timesteps = 50
+
  end  function Reionization_timesteps
- 
+
  subroutine Reionization_ReadParams(Reion, Ini)
   use IniFile
   Type(ReionizationParams) :: Reion
@@ -119,79 +124,79 @@ contains
 
    Reion%Reionization = Ini_Read_Logical_File(Ini,'reionization')
    if (Reion%Reionization) then
-   
-    Reion%use_optical_depth = Ini_Read_Logical_File(Ini,'re_use_optical_depth') 
-  
+
+    Reion%use_optical_depth = Ini_Read_Logical_File(Ini,'re_use_optical_depth')
+
     if (Reion%use_optical_depth) then
               Reion%optical_depth = Ini_Read_Double_File(Ini,'re_optical_depth')
-    else 
+    else
               Reion%redshift = Ini_Read_Double_File(Ini,'re_redshift')
-    end if 
+    end if
 
     Reion%delta_redshift = Ini_Read_Double_File(Ini,'re_delta_redshift', 0.5_dl) !default similar to CMBFAST original
     Reion%fraction = Ini_Read_Double_File(Ini,'re_ionization_frac',Reionization_DefFraction)
-  
+
   end if
 
- end subroutine Reionization_ReadParams 
+ end subroutine Reionization_ReadParams
 
  subroutine Reionization_SetParamsForZre(Reion,ReionHist)
   Type(ReionizationParams), target :: Reion
-  Type(ReionizationHistory), target :: ReionHist 
-     
+  Type(ReionizationHistory), target :: ReionHist
+
        ReionHist%WindowVarMid = (1._dl+Reion%redshift)**Rionization_zexp
        ReionHist%WindowVarDelta = &
          Rionization_zexp*(1._dl+Reion%redshift)**(Rionization_zexp-1._dl)*Reion%delta_redshift
- 
+
  end subroutine Reionization_SetParamsForZre
 
  subroutine Reionization_Init(Reion, ReionHist, Yhe, akthom, tau0, FeedbackLevel)
   use constants
   Type(ReionizationParams), target :: Reion
   Type(ReionizationHistory), target :: ReionHist
-  real(dl), intent(in) :: akthom, tau0, Yhe 
+  real(dl), intent(in) :: akthom, tau0, Yhe
   integer, intent(in) :: FeedbackLevel
   real(dl) astart
 
-     ReionHist%akthom = akthom  
+     ReionHist%akthom = akthom
      ReionHist%fHe =  YHe/(mass_ratio_He_H*(1.d0-YHe))
- 
+
      ReionHist%tau_start=tau0
      ReionHist%tau_complete=tau0
-      
+
      ThisReion => Reion
      ThisReionHist => ReionHist
 
      if (Reion%Reionization) then
- 
+
             if (Reion%optical_depth /= 0._dl .and. .not. Reion%use_optical_depth) &
              write (*,*) 'WARNING: You seem to have set the optical depth, but use_optical_depth = F'
-    
+
 
            if (Reion%use_optical_depth.and.Reion%optical_depth<0.001 &
                 .or. .not.Reion%use_optical_depth .and. Reion%Redshift<0.001) then
                Reion%Reionization = .false.
            end if
-          
-      end if   
-     
+
+      end if
+
      if (Reion%Reionization) then
-           
+
         if (Reion%fraction==Reionization_DefFraction) &
                  Reion%fraction = 1._dl + ReionHist%fHe  !H + singly ionized He
-          
+
        if (Reion%use_optical_depth) then
         call Reionization_SetFromOptDepth(Reion,ReionHist)
         if (FeedbackLevel > 0) write(*,'("Reion redshift       =  ",f6.3)') Reion%redshift
        end if
 
        call Reionization_SetParamsForZre(ThisReion,ThisReionHist)
-       
+
       !this is a check, agrees very well in default parameterization
        if (FeedbackLevel > 1) write(*,'("Integrated opt depth = ",f7.4)') &
-            Reionization_GetOptDepth(Reion, ReionHist) 
+            Reionization_GetOptDepth(Reion, ReionHist)
 
-      !Get relevant times       
+      !Get relevant times
        astart=1.d0/(1.d0+Reion%redshift + Reion%delta_redshift*8)
        ReionHist%tau_start = max(0.05_dl, rombint(dtauda,0._dl,astart,1d-3))
           !Time when a very small reionization fraction (assuming tanh fitting)
@@ -199,14 +204,14 @@ contains
        ReionHist%tau_complete = min(tau0, &
           ReionHist%tau_start+ rombint(dtauda,astart,1.d0/(1.d0+max(0.d0,Reion%redshift-Reion%delta_redshift*8)),1d-3))
 
-    end if   
-       
+    end if
+
  end subroutine Reionization_Init
- 
- 
+
+
  subroutine Reionization_SetDefParams(Reion)
   Type(ReionizationParams) :: Reion
- 
+
        Reion%Reionization = .true.
        Reion%use_optical_depth = .false.
        Reion%optical_depth = 0._dl
@@ -219,13 +224,13 @@ contains
  subroutine Reionization_Validate(Reion, OK)
   Type(ReionizationParams),intent(in) :: Reion
   logical, intent(inout) :: OK
- 
+
       if (Reion%Reionization) then
         if (Reion%use_optical_depth) then
             if (Reion%optical_depth<0 .or. Reion%optical_depth > 0.9  .or. &
                include_helium_fullreion .and. Reion%optical_depth<0.01) then
              OK = .false.
-             write(*,*) 'Optical depth is strange. You have:', Reion%optical_depth 
+             write(*,*) 'Optical depth is strange. You have:', Reion%optical_depth
             end if
         else
             if (Reion%redshift < 0 .or. Reion%Redshift +Reion%delta_redshift*3 > Reionization_maxz .or. &
@@ -247,7 +252,7 @@ contains
 
 
       end if
-             
+
   end  subroutine Reionization_Validate
 
 
@@ -255,18 +260,18 @@ contains
    real(dl) :: Reionization_doptdepth_dz
    real(dl), intent(in) :: z
    real(dl) a
-   
+
    a = 1._dl/(1._dl+z)
-   
+
    Reionization_doptdepth_dz = Reionization_xe(a)*ThisReionHist%akthom*dtauda(a)
 
  end function Reionization_doptdepth_dz
 
-function Reionization_GetOptDepth(Reion, ReionHist) 
+function Reionization_GetOptDepth(Reion, ReionHist)
  Type(ReionizationParams), target :: Reion
  Type(ReionizationHistory), target :: ReionHist
- real(dl) Reionization_GetOptDepth      
-  
+ real(dl) Reionization_GetOptDepth
+
   ThisReion => Reion
   ThisReionHist => ReionHist
   Reionization_GetOptDepth = rombint2(Reionization_doptdepth_dz,0.d0,Reionization_maxz,&
@@ -282,16 +287,16 @@ end function Reionization_GetOptDepth
   real(dl) try_b, try_t
   real(dl) tau
   integer i
-  
+
   try_b = 0
   try_t = Reionization_maxz
   i=0
-  do 
-       i=i+1  
+  do
+       i=i+1
        Reion%redshift = (try_t + try_b)/2
        call Reionization_SetParamsForZre(Reion,ReionHist)
        tau = Reionization_GetOptDepth(Reion, ReionHist)
-       
+
        if (tau > Reion%optical_depth) then
                   try_t = Reion%redshift
           else
@@ -300,23 +305,23 @@ end function Reionization_GetOptDepth
        if (abs(try_b - try_t) < 2e-3/Reionization_AccuracyBoost) exit
        if (i>100) call mpiStop('Reionization_zreFromOptDepth: failed to converge')
   end do
-  
-  
+
+
    if (abs(tau - Reion%optical_depth) > 0.002) then
     write (*,*) 'Reionization_zreFromOptDepth: Did not converge to optical depth'
     write (*,*) 'tau =',tau, 'optical_depth = ', Reion%optical_depth
     write (*,*) try_t, try_b
     call mpiStop()
   end if
-    
- end subroutine Reionization_zreFromOptDepth 
+
+ end subroutine Reionization_zreFromOptDepth
 
 
- 
+
  subroutine Reionization_SetFromOptDepth(Reion, ReionHist)
   Type(ReionizationParams) :: Reion
   Type(ReionizationHistory) :: ReionHist
-   
+
 ! This subroutine calculates the redshift of reionization
 
 ! This implementation is approximate but quite accurate and fast
@@ -324,7 +329,7 @@ end function Reionization_GetOptDepth
       real(dl) dz, optd
       real(dl) z, tmp, tmpHe
       integer na
-      
+
       Reion%redshift = 0
 
       if (Reion%Reionization .and. Reion%optical_depth /= 0) then
@@ -354,10 +359,9 @@ end function Reionization_GetOptDepth
       else
          Reion%Reionization = .false.
       end if
- 
- end  subroutine Reionization_SetFromOptDepth 
+
+ end  subroutine Reionization_SetFromOptDepth
 
 
 
 end module Reionization
-

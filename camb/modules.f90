@@ -94,67 +94,94 @@
     ! Main parameters type
     type CAMBparams
 
-        logical   :: WantCls, WantTransfer
-        logical   :: WantScalars, WantTensors, WantVectors
-        logical   :: DoLensing
-        logical   :: want_zstar, want_zdrag     !!JH for updated BAO likelihood.
-        logical   :: PK_WantTransfer             !JD 08/13 Added so both NL lensing and PK can be run at the same time
-        integer   :: NonLinear
-        logical   :: Want_CMB
+    logical   :: WantCls, WantTransfer
+    logical   :: WantScalars, WantTensors, WantVectors
+    logical   :: DoLensing
+    logical   :: want_zstar, want_zdrag     !!JH for updated BAO likelihood.
+    logical   :: PK_WantTransfer             !JD 08/13 Added so both NL lensing and PK can be run at the same time
+    integer   :: NonLinear
+    logical   :: Want_CMB
 
-        integer   :: Max_l, Max_l_tensor
-        real(dl)  :: Max_eta_k, Max_eta_k_tensor
-        ! _tensor settings only used in initialization,
-        !Max_l and Max_eta_k are set to the tensor variables if only tensors requested
+    integer   :: Max_l, Max_l_tensor
+    real(dl)  :: Max_eta_k, Max_eta_k_tensor
+    ! _tensor settings only used in initialization,
+    !Max_l and Max_eta_k are set to the tensor variables if only tensors requested
 
-        real(dl)  :: omegab, omegac, omegav, omegan
-        !Omega baryon, CDM, Lambda and massive neutrino
-        real(dl)  :: H0,TCMB,yhe,Num_Nu_massless
-        integer   :: Num_Nu_massive !sum of Nu_mass_numbers below
-        integer   :: Nu_mass_eigenstates  !1 for degenerate masses
-        logical   :: share_delta_neff !take fractional part to heat all eigenstates the same
-        real(dl)  :: Nu_mass_degeneracies(max_nu)
-        real(dl)  :: Nu_mass_fractions(max_nu) !The ratios of the total densities
-        integer   :: Nu_mass_numbers(max_nu) !physical number per eigenstate
+    real(dl)  :: omegab, omegac, omegav, omegan
+    !Omega baryon, CDM, Lambda and massive neutrino
+    real(dl)  :: H0,TCMB,yhe,Num_Nu_massless
+    integer   :: Num_Nu_massive !sum of Nu_mass_numbers below
+    integer   :: Nu_mass_eigenstates  !1 for degenerate masses
+    logical   :: share_delta_neff !take fractional part to heat all eigenstates the same
+    real(dl)  :: Nu_mass_degeneracies(max_nu)
+    real(dl)  :: Nu_mass_fractions(max_nu) !The ratios of the total densities
+    integer   :: Nu_mass_numbers(max_nu) !physical number per eigenstate
 
-        integer   :: Scalar_initial_condition
-        !must be one of the initial_xxx values defined in GaugeInterface
+        ! EFTCAMB MOD START
+        ! 1) Definition of flags:
+        integer :: EFTflag
+        integer :: EFTwDE
+        integer :: PureEFTmodelOmega
+        integer :: PureEFTmodelGamma1, PureEFTmodelGamma2, PureEFTmodelGamma3
+        integer :: PureEFTmodelGamma4, PureEFTmodelGamma5, PureEFTmodelGamma6
+        integer :: DesignerEFTmodel
+        integer :: AltParEFTmodel
+        integer :: FullMappingEFTmodel
+        logical :: PureEFTHorndeski
+        integer :: RPHmassPmodel, RPHkineticitymodel, RPHbraidingmodel, RPHtensormodel
+        logical :: HoravaSolarSystem
+        ! 2) Definition of stability flags:
+        logical :: EFT_mathematical_stability, EFT_physical_stability, EFTAdditionalPriors, MinkowskyPriors
+        ! 3) Definition of model parameters:
+        real(dl) :: EFTw0, EFTwa, EFTwn, EFTwat, EFtw2, EFTw3
+        real(dl) :: EFTOmega0, EFTOmegaExp
+        real(dl) :: EFTGamma10, EFTGamma1Exp, EFTGamma20, EFTGamma2Exp
+        real(dl) :: EFTGamma30, EFTGamma3Exp, EFTGamma40, EFTGamma4Exp
+        real(dl) :: EFTGamma50, EFTGamma5Exp, EFTGamma60, EFTGamma6Exp
+        real(dl) :: EFTB0
+        real(dl) :: RPHmassP0, RPHmassPexp, RPHkineticity0, RPHkineticityexp
+        real(dl) :: RPHbraiding0, RPHbraidingexp, RPHtensor0, RPHtensorexp
+        real(dl) :: Horava_xi, Horava_lambda, Horava_eta
+        ! EFTCAMB MOD END
 
-        integer   :: OutputNormalization
-        !outNone, or C_OutputNormalization=1 if > 1
+    integer   :: Scalar_initial_condition
+    !must be one of the initial_xxx values defined in GaugeInterface
 
-        logical   :: AccuratePolarization
-        !Do you care about the accuracy of the polarization Cls?
+    integer   :: OutputNormalization
+    !outNone, or C_OutputNormalization=1 if > 1
 
-        logical   :: AccurateBB
-        !Do you care about BB accuracy (e.g. in lensing)
+    logical   :: AccuratePolarization
+    !Do you care about the accuracy of the polarization Cls?
 
-        !Reionization settings - used if Reion%Reionization=.true.
-        logical   :: AccurateReionization
-        !Do you care about pecent level accuracy on EE signal from reionization?
+    logical   :: AccurateBB
+    !Do you care about BB accuracy (e.g. in lensing)
 
-        integer   :: MassiveNuMethod
+    !Reionization settings - used if Reion%Reionization=.true.
+    logical   :: AccurateReionization
+    !Do you care about pecent level accuracy on EE signal from reionization?
 
-        type(InitialPowerParams) :: InitPower  !see power_tilt.f90 - you can change this
-        type(ReionizationParams) :: Reion
-        type(RecombinationParams):: Recomb
-        type(TransferParams)     :: Transfer
+    integer   :: MassiveNuMethod
 
-        real(dl) ::  InitialConditionVector(1:10) !Allow up to 10 for future extensions
-        !ignored unless Scalar_initial_condition == initial_vector
+    type(InitialPowerParams) :: InitPower  !see power_tilt.f90 - you can change this
+    type(ReionizationParams) :: Reion
+    type(RecombinationParams):: Recomb
+    type(TransferParams)     :: Transfer
 
-        logical OnlyTransfers !Don't use initial power spectrum data, instead get Delta_q_l array
-        !If true, sigma_8 is not calculated either
+    real(dl) ::  InitialConditionVector(1:10) !Allow up to 10 for future extensions
+    !ignored unless Scalar_initial_condition == initial_vector
 
-        logical DerivedParameters !calculate various derived parameters  (ThermoDerivedParams)
+    logical OnlyTransfers !Don't use initial power spectrum data, instead get Delta_q_l array
+    !If true, sigma_8 is not calculated either
 
-        !Derived parameters, not set initially
-        type(ReionizationHistory) :: ReionHist
+    logical DerivedParameters !calculate various derived parameters  (ThermoDerivedParams)
 
-        logical flat,closed,open
-        real(dl) omegak
-        real(dl) curv,r, Ksign !CP%r = 1/sqrt(|CP%curv|), CP%Ksign = 1,0 or -1
-        real(dl) tau0,chi0 !time today and rofChi(CP%tau0/CP%r)
+    !Derived parameters, not set initially
+    type(ReionizationHistory) :: ReionHist
+
+    logical flat,closed,open
+    real(dl) omegak
+    real(dl) curv,r, Ksign !CP%r = 1/sqrt(|CP%curv|), CP%Ksign = 1,0 or -1
+    real(dl) tau0,chi0 !time today and rofChi(CP%tau0/CP%r)
 
     end type CAMBparams
 
@@ -319,7 +346,7 @@
             CP%Nu_mass_degeneracies(1:CP%Nu_mass_eigenstates) = CP%Nu_mass_numbers(1:CP%Nu_mass_eigenstates)*neff_i
         end if
         if (abs(sum(CP%Nu_mass_fractions(1:CP%Nu_mass_eigenstates))-1) > 1e-4) &
-            stop 'Nu_mass_fractions do not add up to 1'
+        stop 'Nu_mass_fractions do not add up to 1'
     else
         CP%Nu_mass_eigenstates = 0
     end if
@@ -401,7 +428,7 @@
     if (CP%NonLinear==NonLinear_Lens .or. CP%NonLinear==NonLinear_both ) then
         CP%Transfer%kmax = max(CP%Transfer%kmax, CP%Max_eta_k/CP%tau0)
         if (FeedbackLevel > 0 .and. CP%Transfer%kmax== CP%Max_eta_k/CP%tau0) &
-            write (*,*) 'max_eta_k changed to ', CP%Max_eta_k
+        write (*,*) 'max_eta_k changed to ', CP%Max_eta_k
     end if
 
     if (CP%closed .and. CP%tau0/CP%r >3.14) then
@@ -425,12 +452,12 @@
         write(*,'("100 theta (CosmoMC)  = ",f9.6)') 100*CosmomcTheta()
         if (CP%Num_Nu_Massive > 0) then
             write(*,'("N_eff (total)        = ",f9.6)') nu_massless_degeneracy + &
-                sum(CP%Nu_mass_degeneracies(1:CP%Nu_mass_eigenstates))
+            sum(CP%Nu_mass_degeneracies(1:CP%Nu_mass_eigenstates))
             do nu_i=1, CP%Nu_mass_eigenstates
                 conv = k_B*(8*grhor/grhog/7)**0.25*CP%tcmb/eV * &
-                    (CP%nu_mass_degeneracies(nu_i)/CP%nu_mass_numbers(nu_i))**0.25 !approx 1.68e-4
+                (CP%nu_mass_degeneracies(nu_i)/CP%nu_mass_numbers(nu_i))**0.25 !approx 1.68e-4
                 write(*,'(I2, " nu, g=",f7.4," m_nu*c^2/k_B/T_nu0= ",f9.2," (m_nu= ",f6.3," eV)")') &
-                    CP%nu_mass_numbers(nu_i), CP%nu_mass_degeneracies(nu_i), nu_masses(nu_i),conv*nu_masses(nu_i)
+                CP%nu_mass_numbers(nu_i), CP%nu_mass_degeneracies(nu_i), nu_masses(nu_i),conv*nu_masses(nu_i)
             end do
         end if
     end if
@@ -558,14 +585,14 @@
     AngularDiameterDistance = CP%r/(1+z)*rofchi(ComovingRadialDistance(z) /CP%r)
 
     end function AngularDiameterDistance
-
+    
     function AngularDiameterDistance2(z1, z2) ! z1 < z2
     !From http://www.slac.stanford.edu/~amantz/work/fgas14/#cosmomc
     real(dl) AngularDiameterDistance2
     real(dl), intent(in) :: z1, z2
-
+ 
     AngularDiameterDistance2 = CP%r/(1+z2)*rofchi(ComovingRadialDistance(z2)/CP%r - ComovingRadialDistance(z1)/CP%r)
-
+    
     end function AngularDiameterDistance2
 
     function LuminosityDistance(z)
@@ -654,8 +681,8 @@
 
     !!From Hu & Sugiyama
     zstar =  1048*(1+0.00124*ombh2**(-0.738))*(1+ &
-        (0.0783*ombh2**(-0.238)/(1+39.5*ombh2**0.763)) * &
-        (omdmh2+ombh2)**(0.560/(1+21.1*ombh2**1.81)))
+    (0.0783*ombh2**(-0.238)/(1+39.5*ombh2**0.763)) * &
+    (omdmh2+ombh2)**(0.560/(1+21.1*ombh2**1.81)))
 
     astar = 1/(1+zstar)
     atol = 1e-6
@@ -894,7 +921,7 @@
         b0=(xi-lSet%l(llo))/ho
 
         all_Cl(il) = a0*iCl(llo)+ b0*iCl(lhi)+((a0**3-a0)* ddCl(llo) &
-            +(b0**3-b0)*ddCl(lhi))*ho**2/6
+        +(b0**3-b0)*ddCl(lhi))*ho**2/6
     end do
 
     end subroutine InterpolateClArr
@@ -1021,7 +1048,7 @@
     call Ranges_getArray(CTrans%q, .true.)
 
     allocate(CTrans%Delta_p_l_k(CTrans%NumSources,&
-        min(CTrans%max_index_nonlimber,CTrans%ls%l0), CTrans%q%npoints),  STAT = st)
+    min(CTrans%max_index_nonlimber,CTrans%ls%l0), CTrans%q%npoints),  STAT = st)
     if (st /= 0) stop 'Init_ClTransfer: Error allocating memory for transfer functions'
     CTrans%Delta_p_l_k = 0
 
@@ -1088,7 +1115,7 @@
         end do
 
 500     if (L< lmax_extrap_highl) &
-            stop 'CheckLoadedHighLTemplate: template file does not go up to lmax_extrap_highl'
+        stop 'CheckLoadedHighLTemplate: template file does not go up to lmax_extrap_highl'
         close(fileio_unit)
     end if
 
@@ -1149,7 +1176,7 @@
             end do
             do il=10100,CP%Max_l, 100
                 write(fileio_unit,trim(numcat('(1E15.5,',last_C))//'E15.5)') real(il),&
-                    fact*Cl_scalar(il,in,C_Temp:last_C)
+                fact*Cl_scalar(il,in,C_Temp:last_C)
             end do
         end do
         close(fileio_unit)
@@ -1191,7 +1218,7 @@
         do in=1,CP%InitPower%nn
             do il=lmin,CP%Max_l_tensor
                 write(fileio_unit,'(1I6,4E15.5)')il, fact*(Cl_scalar(il, in, C_Temp:C_E)+ Cl_tensor(il,in, C_Temp:C_E)), &
-                    fact*Cl_tensor(il,in, CT_B), fact*(Cl_scalar(il, in, C_Cross) + Cl_tensor(il, in, CT_Cross))
+                fact*Cl_tensor(il,in, CT_B), fact*(Cl_scalar(il, in, C_Cross) + Cl_tensor(il, in, CT_Cross))
             end do
             do il=CP%Max_l_tensor+1,CP%Max_l
                 write(fileio_unit,'(1I6,4E15.5)')il ,fact*Cl_scalar(il,in,C_Temp:C_E), 0._dl, fact*Cl_scalar(il,in,C_Cross)
@@ -1262,13 +1289,13 @@
                 scale = (real(il+1)/il)**2/OutputDenominator !Factor to go from old l^4 factor to new
 
                 write(fileio_unit,'(1I6,7E15.5)') il , fact*TT, fact*EE, fact*BB, fact*TE, scale*Cl_scalar(il,in,C_Phi),&
-                    (real(il+1)/il)**1.5/OutputDenominator*sqrt(fact)*Cl_scalar(il,in,C_PhiTemp:C_PhiE)
+                (real(il+1)/il)**1.5/OutputDenominator*sqrt(fact)*Cl_scalar(il,in,C_PhiTemp:C_PhiE)
             end do
             do il=10100,CP%Max_l, 100
                 scale = (real(il+1)/il)**2/OutputDenominator
                 write(fileio_unit,'(1E15.5,7E15.5)') real(il), fact*Cl_scalar(il,in,C_Temp:C_E),0.,fact*Cl_scalar(il,in,C_Cross), &
-                    scale*Cl_scalar(il,in,C_Phi),&
-                    (real(il+1)/il)**1.5/OutputDenominator*sqrt(fact)*Cl_scalar(il,in,C_PhiTemp:C_PhiE)
+                scale*Cl_scalar(il,in,C_Phi),&
+                (real(il+1)/il)**1.5/OutputDenominator*sqrt(fact)*Cl_scalar(il,in,C_PhiTemp:C_PhiE)
             end do
         end do
         close(fileio_unit)
@@ -1320,7 +1347,7 @@
             if (.not.CP%WantScalars) Norm = 1/Cl_tensor(lnorm,in, C_Temp)
             !Otherwise Norm already set correctly
             Cl_tensor(lmin:CP%Max_l_tensor, in, CT_Temp:CT_Cross) =  &
-                Cl_tensor(lmin:CP%Max_l_tensor, in, CT_Temp:CT_Cross) * Norm
+            Cl_tensor(lmin:CP%Max_l_tensor, in, CT_Temp:CT_Cross) * Norm
         end if
     end do
 
@@ -1367,7 +1394,11 @@
 
     real(dl) dlnam
 
-    real(dl), dimension(:), allocatable ::  r1,p1,dr1,dp1,ddr1
+    ! EFTCAMB MOD START: compatibility with massive neutrinos           
+    real(dl), dimension(:), allocatable ::  r1,p1,dr1,dp1,ddr1, ddp1, dddp1
+    ! Original code:
+    ! real(dl), dimension(:), allocatable ::  r1,p1,dr1,dp1,ddr1
+    ! EFTCAMB MOD END.
 
     !Sample for massive neutrino momentum
     !These settings appear to be OK for P_k accuate at 1e-3 level
@@ -1376,8 +1407,14 @@
 
     integer nqmax !actual number of q modes evolves
 
+    ! EFTCAMB MOD START: compatibility with massive neutrinos           
     public const,Nu_Init,Nu_background, Nu_rho, Nu_drho,  nqmax0, nqmax, &
-        nu_int_kernel, nu_q
+        nu_int_kernel, nu_q, Nu_pidot, Nu_pidotdot
+    ! Original code:
+    ! public const,Nu_Init,Nu_background, Nu_rho, Nu_drho,  nqmax0, nqmax, &
+    ! nu_int_kernel, nu_q
+    ! EFTCAMB MOD END.
+
     contains
     !cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
@@ -1398,12 +1435,16 @@
 
     do i=1, CP%Nu_mass_eigenstates
         nu_masses(i)=const/(1.5d0*zeta3)*grhom/grhor*CP%omegan*CP%Nu_mass_fractions(i) &
-            /CP%Nu_mass_degeneracies(i)
+        /CP%Nu_mass_degeneracies(i)
     end do
 
     if (allocated(r1)) return
-    allocate(r1(nrhopn),p1(nrhopn),dr1(nrhopn),dp1(nrhopn),ddr1(nrhopn))
 
+        ! EFTCAMB MOD START: compatibility with massive neutrinos               
+        allocate(r1(nrhopn),p1(nrhopn),dr1(nrhopn),dp1(nrhopn),ddr1(nrhopn),ddp1(nrhopn),dddp1(nrhopn))
+        ! Original code:
+        ! allocate(r1(nrhopn),p1(nrhopn),dr1(nrhopn),dp1(nrhopn),ddr1(nrhopn))
+        ! EFTCAMB MOD END.
 
     nqmax=3
     if (AccuracyBoost >1) nqmax=4
@@ -1446,10 +1487,10 @@
     !$OMP PARALLEL DO DEFAULT(SHARED),SCHEDULE(STATIC) &
     !$OMP & PRIVATE(am, rhonu,pnu)
     do i=1,nrhopn
-    am=am_min*exp((i-1)*dlnam)
-    call nuRhoPres(am,rhonu,pnu)
-    r1(i)=log(rhonu)
-    p1(i)=log(pnu)
+        am=am_min*exp((i-1)*dlnam)
+        call nuRhoPres(am,rhonu,pnu)
+        r1(i)=log(rhonu)
+        p1(i)=log(pnu)
     end do
     !$OMP END PARALLEL DO
 
@@ -1459,6 +1500,10 @@
     call splder(p1,dp1,nrhopn,spline_data)
     call splder(dr1,ddr1,nrhopn,spline_data)
 
+        ! EFTCAMB MOD START: compatibility with massive neutrinos       
+        call splder(dp1,ddp1,nrhopn,spline_data)
+        call splder(ddp1,dddp1,nrhopn,spline_data)
+        ! EFTCAMB MOD END.
 
     end subroutine Nu_init
 
@@ -1529,9 +1574,9 @@
 
     !  Cubic spline interpolation.
     rhonu=r1(i)+d*(dr1(i)+d*(3._dl*(r1(i+1)-r1(i))-2._dl*dr1(i) &
-        -dr1(i+1)+d*(dr1(i)+dr1(i+1)+2._dl*(r1(i)-r1(i+1)))))
+    -dr1(i+1)+d*(dr1(i)+dr1(i+1)+2._dl*(r1(i)-r1(i+1)))))
     pnu=p1(i)+d*(dp1(i)+d*(3._dl*(p1(i+1)-p1(i))-2._dl*dp1(i) &
-        -dp1(i+1)+d*(dp1(i)+dp1(i+1)+2._dl*(p1(i)-p1(i+1)))))
+    -dp1(i+1)+d*(dp1(i)+dp1(i+1)+2._dl*(p1(i)-p1(i+1)))))
     rhonu=exp(rhonu)
     pnu=exp(pnu)
 
@@ -1565,7 +1610,7 @@
 
     !  Cubic spline interpolation.
     rhonu=r1(i)+d*(dr1(i)+d*(3._dl*(r1(i+1)-r1(i))-2._dl*dr1(i) &
-        -dr1(i+1)+d*(dr1(i)+dr1(i+1)+2._dl*(r1(i)-r1(i+1)))))
+    -dr1(i+1)+d*(dr1(i)+dr1(i+1)+2._dl*(r1(i)-r1(i+1)))))
     rhonu=exp(rhonu)
     end subroutine Nu_rho
 
@@ -1592,13 +1637,69 @@
         d=d-i
         !  Cubic spline interpolation for rhonudot.
         rhonudot=dr1(i)+d*(ddr1(i)+d*(3._dl*(dr1(i+1)-dr1(i)) &
-            -2._dl*ddr1(i)-ddr1(i+1)+d*(ddr1(i)+ddr1(i+1) &
-            +2._dl*(dr1(i)-dr1(i+1)))))
+        -2._dl*ddr1(i)-ddr1(i+1)+d*(ddr1(i)+ddr1(i+1) &
+        +2._dl*(dr1(i)-dr1(i+1)))))
 
         rhonudot=rhonu*adotoa*rhonudot/dlnam
     end if
 
     end function Nu_drho
+
+    ! EFTCAMB MOD START: compatibility with massive neutrinos       
+    function Nu_pidot(am,adotoa,presnu) result (presnudot)
+        use precision
+        use ModelParams
+
+        real(dl) adotoa,presnu,presnudot
+        real(dl) d
+        real(dl), intent(IN) :: am
+        integer i
+
+        if (am< am_minp) then
+            presnudot = -2*const2*am**2*adotoa/3._dl
+        else if (am>am_maxp) then
+            presnudot = -((15._dl*(4._dl*am**2*zeta5 -189._dl*Zeta7))/(8._dl*am**3*const))*adotoa
+        else
+            d=log(am/am_min)/dlnam+1._dl
+            i=int(d)
+            d=d-i
+
+            presnudot = dp1(i)+d*(ddp1(i)+d*(3._dl*(dp1(i+1)-dp1(i))-2._dl*ddp1(i) &
+                -ddp1(i+1)+d*(ddp1(i)+ddp1(i+1)+2._dl*(dp1(i)-dp1(i+1)))))
+
+            presnudot=presnu*adotoa*presnudot/dlnam
+        end if
+
+    end function Nu_pidot
+
+    function Nu_pidotdot(am,adotoa,Hdot,presnu,presnudot) result (presnudotdot)
+        use precision
+        use ModelParams
+
+        real(dl) adotoa,Hdot,presnu,presnudot,presnudotdot
+        real(dl) d
+        real(dl), intent(in) :: am
+        integer i
+
+        if (am< am_minp) then
+            presnudotdot = presnudot*(adotoa +Hdot/adotoa) +am**2*adotoa**2*(-2._dl*const2/3._dl)
+        else if (am>am_maxp) then
+            presnudotdot = presnudot*(adotoa +Hdot/adotoa) +am**2*adotoa**2*(&
+                &-((15._dl*zeta5)/(am**3*const)) + (15._dl*(4._dl*am**2*zeta5 -189._dl*Zeta7))/(2._dl*am**5*const))
+        else
+
+            d=log(am/am_min)/dlnam+1._dl
+            i=int(d)
+            d=d-i
+
+            presnudotdot = ddp1(i)+d*(dddp1(i)+d*(3._dl*(ddp1(i+1)-ddp1(i))-2._dl*dddp1(i) &
+                -dddp1(i+1)+d*(dddp1(i)+dddp1(i+1)+2._dl*(ddp1(i)-ddp1(i+1)))))
+
+            presnudotdot = +adotoa**2*presnu*presnudotdot/dlnam +Hdot/adotoa*presnudot +presnudot**2/presnu
+        end if
+
+    end function Nu_pidotdot
+    ! EFTCAMB MOD END.
 
     end module MassiveNu
 
@@ -1823,7 +1924,7 @@
 
     do i = 1,PK_Data%num_z
         call spline(PK_data%log_kh,PK_data%matpower(1,i),PK_data%num_k,&
-            cllo,clhi,PK_data%ddmat(1,i))
+        cllo,clhi,PK_data%ddmat(1,i))
     end do
 
     end subroutine MatterPowerdata_getsplines
@@ -1873,13 +1974,13 @@
     logk = log(kh)
     if (logk < PK%log_kh(1)) then
         dp = (PK%matpower(2,itf) -  PK%matpower(1,itf)) / &
-            ( PK%log_kh(2)-PK%log_kh(1) )
+        ( PK%log_kh(2)-PK%log_kh(1) )
         outpower = PK%matpower(1,itf) + dp*(logk - PK%log_kh(1))
     else if (logk > PK%log_kh(PK%num_k)) then
         !Do dodgy linear extrapolation on assumption accuracy of result won't matter
 
         dp = (PK%matpower(PK%num_k,itf) -  PK%matpower(PK%num_k-1,itf)) / &
-            ( PK%log_kh(PK%num_k)-PK%log_kh(PK%num_k-1) )
+        ( PK%log_kh(PK%num_k)-PK%log_kh(PK%num_k-1) )
         outpower = PK%matpower(PK%num_k,itf) + dp*(logk - PK%log_kh(PK%num_k))
     else
         llo=min(i_last,PK%num_k)
@@ -1896,8 +1997,8 @@
         b0=1-a0
 
         outpower = a0*PK%matpower(llo,itf)+ b0*PK%matpower(lhi,itf)+&
-            ((a0**3-a0)* PK%ddmat(llo,itf) &
-            +(b0**3-b0)*PK%ddmat(lhi,itf))*ho**2/6
+        ((a0**3-a0)* PK%ddmat(llo,itf) &
+        +(b0**3-b0)*PK%ddmat(lhi,itf))*ho**2/6
     end if
 
     outpower = exp(max(-30._dl,outpower))
@@ -1961,8 +2062,8 @@
     !            stop 'Transfer_GetMatterPower: kh out of computed region'
     !          end if
     if (minkh*exp((npoints-1)*dlnkh) > MTrans%TransferData(Transfer_kh,MTrans%num_q_trans,itf) &
-        .and. FeedbackLevel > 0 ) &
-        write(*,*) 'Warning: extrapolating matter power in Transfer_GetMatterPower'
+    .and. FeedbackLevel > 0 ) &
+    write(*,*) 'Warning: extrapolating matter power in Transfer_GetMatterPower'
 
 
     if (CP%NonLinear/=NonLinear_none .and. CP%NonLinear/=NonLinear_Lens) then
@@ -2007,7 +2108,7 @@
         b0=(xi-kvals(llo))/ho
 
         outpower(il) = a0*matpower(llo)+ b0*matpower(lhi)+((a0**3-a0)* ddmat(llo) &
-            +(b0**3-b0)*ddmat(lhi))*ho**2/6
+        +(b0**3-b0)*ddmat(lhi))*ho**2/6
     end do
 
     do while (lastix <= npoints)
@@ -2304,6 +2405,7 @@
         end if
     end do
 
+
     end subroutine Transfer_SaveToFiles
 
     subroutine Transfer_SaveMatterPower(MTrans, FileNames)
@@ -2338,7 +2440,7 @@
                     !JD 08/13 for nonlinear lensing of CMB + LSS compatibility
                     !Changed (CP%NonLinear/=NonLinear_None) to CP%NonLinear/=NonLinear_none .and. CP%NonLinear/=NonLinear_Lens)
                     if(CP%NonLinear/=NonLinear_none .and. CP%NonLinear/=NonLinear_Lens)&
-                        call MatterPowerdata_MakeNonlinear(PK_Data)
+                    call MatterPowerdata_MakeNonlinear(PK_Data)
 
                     outpower(:,in,1) = exp(PK_data%matpower(:,1))
                     call MatterPowerdata_Free(PK_Data)
@@ -2392,7 +2494,7 @@
         !JD write the next line like this to account for roundoff issues with ==. Preference given to PK_Redshift
         i=i+1
         if (i > max_transfer_redshifts) &
-            call Mpistop('Transfer_SortAndIndexRedshifts: Too many redshifts')
+        call Mpistop('Transfer_SortAndIndexRedshifts: Too many redshifts')
 
         if(iNLL>P%NLL_num_redshifts .or. P%PK_redshifts(iPK)>P%NLL_redshifts(iNLL)+tol) then
             P%redshifts(i)=P%PK_redshifts(iPK)
@@ -2442,8 +2544,8 @@
     real(dl) :: r_drag0, z_star, z_drag  !!JH for updated BAO likelihood.
 
     public thermo,inithermo,vis,opac,expmmu,dvis,dopac,ddvis,lenswin, tight_tau,&
-        Thermo_OpacityToTime,matter_verydom_tau, ThermoData_Free,&
-        z_star, z_drag  !!JH for updated BAO likelihood.
+    Thermo_OpacityToTime,matter_verydom_tau, ThermoData_Free,&
+    z_star, z_drag  !!JH for updated BAO likelihood.
     contains
 
     subroutine thermo(tau,cs2b,opacity, dopacity)
@@ -2475,16 +2577,16 @@
     else
         !Cubic spline interpolation.
         cs2b=cs2(i)+d*(dcs2(i)+d*(3*(cs2(i+1)-cs2(i))  &
-            -2*dcs2(i)-dcs2(i+1)+d*(dcs2(i)+dcs2(i+1)  &
-            +2*(cs2(i)-cs2(i+1)))))
+        -2*dcs2(i)-dcs2(i+1)+d*(dcs2(i)+dcs2(i+1)  &
+        +2*(cs2(i)-cs2(i+1)))))
         opacity=dotmu(i)+d*(ddotmu(i)+d*(3*(dotmu(i+1)-dotmu(i)) &
-            -2*ddotmu(i)-ddotmu(i+1)+d*(ddotmu(i)+ddotmu(i+1) &
-            +2*(dotmu(i)-dotmu(i+1)))))
+        -2*ddotmu(i)-ddotmu(i+1)+d*(ddotmu(i)+ddotmu(i+1) &
+        +2*(dotmu(i)-dotmu(i+1)))))
 
         if (present(dopacity)) then
             dopacity=(ddotmu(i)+d*(dddotmu(i)+d*(3*(ddotmu(i+1)  &
-                -ddotmu(i))-2*dddotmu(i)-dddotmu(i+1)+d*(dddotmu(i) &
-                +dddotmu(i+1)+2*(ddotmu(i)-ddotmu(i+1))))))/(tau*dlntau)
+            -ddotmu(i))-2*dddotmu(i)-dddotmu(i+1)+d*(dddotmu(i) &
+            +dddotmu(i+1)+2*(ddotmu(i)-ddotmu(i+1))))))/(tau*dlntau)
         end if
     end if
     end subroutine thermo
@@ -2533,7 +2635,7 @@
     external rombint
 
     call Recombination_Init(CP%Recomb, CP%omegac, CP%omegab,CP%Omegan, CP%Omegav, &
-        CP%h0,CP%tcmb,CP%yhe,CP%Num_Nu_massless + CP%Num_Nu_massive)
+    CP%h0,CP%tcmb,CP%yhe,CP%Num_Nu_massless + CP%Num_Nu_massive)
     !almost all the time spent here
     if (global_error_flag/=0) return
     Maxtau=taumax
@@ -2658,8 +2760,8 @@
         else
             emmu(j1)=exp(sdotmu(j1)-sdotmu(nthermo))
             if (.not. CP%AccurateReionization .and. &
-                actual_opt_depth==0 .and. xe(j1) < 1e-3) then
-            actual_opt_depth = -sdotmu(j1)+sdotmu(nthermo)
+            actual_opt_depth==0 .and. xe(j1) < 1e-3) then
+                actual_opt_depth = -sdotmu(j1)+sdotmu(nthermo)
             end if
             if (CP%AccurateReionization .and. CP%DerivedParameters .and. z_star==0.d0) then
                 if (sdotmu(nthermo)-sdotmu(j1) - actual_opt_depth < 1) then
@@ -2789,14 +2891,14 @@
 
         if (associated(BackgroundOutputs%z_outputs)) then
             if (allocated(BackgroundOutputs%H)) &
-                deallocate(BackgroundOutputs%H, BackgroundOutputs%DA, BackgroundOutputs%rs_by_D_v)
+            deallocate(BackgroundOutputs%H, BackgroundOutputs%DA, BackgroundOutputs%rs_by_D_v)
             noutput = size(BackgroundOutputs%z_outputs)
             allocate(BackgroundOutputs%H(noutput), BackgroundOutputs%DA(noutput), BackgroundOutputs%rs_by_D_v(noutput))
             do i=1,noutput
                 BackgroundOutputs%H(i) = HofZ(BackgroundOutputs%z_outputs(i))
                 BackgroundOutputs%DA(i) = AngularDiameterDistance(BackgroundOutputs%z_outputs(i))
                 BackgroundOutputs%rs_by_D_v(i) = rs/BAO_D_v_from_DA_H(BackgroundOutputs%z_outputs(i), &
-                    BackgroundOutputs%DA(i),BackgroundOutputs%H(i))
+                BackgroundOutputs%DA(i),BackgroundOutputs%H(i))
             end do
         end if
 
@@ -2888,25 +2990,25 @@
     d=d-i
     if (i < nthermo) then
         opac(j2)=dotmu(i)+d*(ddotmu(i)+d*(3._dl*(dotmu(i+1)-dotmu(i)) &
-            -2._dl*ddotmu(i)-ddotmu(i+1)+d*(ddotmu(i)+ddotmu(i+1) &
-            +2._dl*(dotmu(i)-dotmu(i+1)))))
+        -2._dl*ddotmu(i)-ddotmu(i+1)+d*(ddotmu(i)+ddotmu(i+1) &
+        +2._dl*(dotmu(i)-dotmu(i+1)))))
         dopac(j2)=(ddotmu(i)+d*(dddotmu(i)+d*(3._dl*(ddotmu(i+1)  &
-            -ddotmu(i))-2._dl*dddotmu(i)-dddotmu(i+1)+d*(dddotmu(i) &
-            +dddotmu(i+1)+2._dl*(ddotmu(i)-ddotmu(i+1))))))/(tau &
-            *dlntau)
+        -ddotmu(i))-2._dl*dddotmu(i)-dddotmu(i+1)+d*(dddotmu(i) &
+        +dddotmu(i+1)+2._dl*(ddotmu(i)-ddotmu(i+1))))))/(tau &
+        *dlntau)
         ddopac=(dddotmu(i)+d*(ddddotmu(i)+d*(3._dl*(dddotmu(i+1) &
-            -dddotmu(i))-2._dl*ddddotmu(i)-ddddotmu(i+1)  &
-            +d*(ddddotmu(i)+ddddotmu(i+1)+2._dl*(dddotmu(i) &
-            -dddotmu(i+1)))))-(dlntau**2)*tau*dopac(j2)) &
-            /(tau*dlntau)**2
+        -dddotmu(i))-2._dl*ddddotmu(i)-ddddotmu(i+1)  &
+        +d*(ddddotmu(i)+ddddotmu(i+1)+2._dl*(dddotmu(i) &
+        -dddotmu(i+1)))))-(dlntau**2)*tau*dopac(j2)) &
+        /(tau*dlntau)**2
         expmmu(j2)=emmu(i)+d*(demmu(i)+d*(3._dl*(emmu(i+1)-emmu(i)) &
-            -2._dl*demmu(i)-demmu(i+1)+d*(demmu(i)+demmu(i+1) &
-            +2._dl*(emmu(i)-emmu(i+1)))))
+        -2._dl*demmu(i)-demmu(i+1)+d*(demmu(i)+demmu(i+1) &
+        +2._dl*(emmu(i)-emmu(i+1)))))
 
         if (dowinlens) then
             lenswin(j2)=winlens(i)+d*(dwinlens(i)+d*(3._dl*(winlens(i+1)-winlens(i)) &
-                -2._dl*dwinlens(i)-dwinlens(i+1)+d*(dwinlens(i)+dwinlens(i+1) &
-                +2._dl*(winlens(i)-winlens(i+1)))))
+            -2._dl*dwinlens(i)-dwinlens(i+1)+d*(dwinlens(i)+dwinlens(i+1) &
+            +2._dl*(winlens(i)-winlens(i+1)))))
         end if
         vis(j2)=opac(j2)*expmmu(j2)
         dvis(j2)=expmmu(j2)*(opac(j2)**2+dopac(j2))
