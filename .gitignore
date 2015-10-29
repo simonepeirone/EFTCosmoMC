@@ -1,0 +1,29 @@
+# ignore the MAC files
+.DS_Store
+
+# ignore the ECLIPSE project file
+.project
+
+# ignore compilation products
+*.mod
+*.o
+*.a
+*.pyc
+
+# ignore the executables
+cosmomc
+getdist
+eft_stability_sampler
+
+camb/camb
+camb/eftstability
+camb/fort.*
+camb/eftprofile
+camb/eftbenchmark
+camb/*.out
+
+# ignore the link to the planck data library
+data/clik
+
+# ignore profiler output
+*gmon.out
