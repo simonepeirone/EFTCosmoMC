@@ -143,6 +143,10 @@
     P%RPHbraidingexp   = CMB%RPHbraidingexp
     P%RPHtensor0       = CMB%RPHtensor0
     P%RPHtensorexp     = CMB%RPHtensorexp
+    ! Horava model:
+    P%Horava_xi        = CMB%Horava_xi
+    P%Horava_lambda    = CMB%Horava_lambda
+    P%Horava_eta       = CMB%Horava_eta
     ! EFTCOSMOMC MOD END.
 
     if (CMB%omnuh2>0) then
