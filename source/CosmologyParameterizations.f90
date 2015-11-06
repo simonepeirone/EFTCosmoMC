@@ -361,8 +361,8 @@
         CMB%RPHtensor0       = Params(44)
         CMB%RPHtensorexp     = Params(45)
         CMB%Horava_xi        = Params(46)
-        CMB%Horava_lambda    = Params(47)
-        CMB%Horava_eta       = Params(48) 
+        CMB%Horava_lambda    = 10.**(Params(47))
+        CMB%Horava_eta       = 10.**(Params(48))
         ! EFTCOSMOMC MOD END.
 
     end if
