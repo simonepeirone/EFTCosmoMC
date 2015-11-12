@@ -102,15 +102,15 @@ camb: directories $(CAMBOBJ) $(DRIVER)
 eftstability: directories $(EFTCAMB_STAB_OBJ) $(EFT_STAB_DRIVER)
 	$(F90C) $(F90FLAGS) $(EFTCAMB_STAB_OBJ) $(EFT_STAB_DRIVER) $(F90CRLINK) -o $@
 
-eftbenchmark: directories $(CAMBOBJ) EFTCAMB_benchmark.f90
-	$(F90C) $(F90FLAGS) $(CAMBOBJ) EFTCAMB_benchmark.f90 $(F90CRLINK) -o $@
+eftbenchmark: directories $(CAMBOBJ) EFTCAMB_benchmark.F90
+	$(F90C) $(F90FLAGS) $(CAMBOBJ) EFTCAMB_benchmark.F90 $(F90CRLINK) -o $@
 
 ifeq ($(MAKECMDGOALS), eftprofile)
 F90FLAGS += -pg
 endif
 
-eftprofile: directories $(CAMBOBJ) EFTCAMB_benchmark.f90
-	$(F90C) $(F90FLAGS) $(CAMBOBJ) EFTCAMB_benchmark.f90 $(F90CRLINK) -o $@
+eftprofile: directories $(CAMBOBJ) EFTCAMB_benchmark.F90
+	$(F90C) $(F90FLAGS) $(CAMBOBJ) EFTCAMB_benchmark.F90 $(F90CRLINK) -o $@
 
 # EFTCAMB MOD END
 
@@ -145,5 +145,3 @@ libCosmoRec.a:
 
 libhyrec.a:
 	cd $(HYREC_PATH); make libhyrec.a;
-
-
