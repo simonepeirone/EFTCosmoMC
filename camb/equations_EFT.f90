@@ -25,7 +25,7 @@
     real(dl) :: cs2_lam = 1_dl
     !comoving sound speed. Always exactly 1 for quintessence
     !(otherwise assumed constant, though this is almost certainly unrealistic)
-    
+
     real(dl), parameter :: wa_ppf = 0._dl !Not used here, just for compatibility with e.g. halofit
 
     logical :: w_perturb = .true.
@@ -1019,7 +1019,7 @@
     subroutine MassiveNuVarsOut(EV,y,yprime,a,grho,gpres,dgrho,dgq,dgpi, gdpi_diff,pidot_sum,clxnu_all)
     implicit none
     type(EvolutionVars) EV
-    real(dl) :: y(EV%nvar), yprime(EV%nvar),a 
+    real(dl) :: y(EV%nvar), yprime(EV%nvar),a
     real(dl), optional :: grho,gpres,dgrho,dgq,dgpi, gdpi_diff,pidot_sum,clxnu_all
     !grho = a^2 kappa rho
     !gpres = a^2 kappa p
@@ -1233,7 +1233,7 @@
     end subroutine Nu_Intvsq
 
 
-        ! EFTCAMB MOD START: compatibility with massive neutrinos        
+        ! EFTCAMB MOD START: compatibility with massive neutrinos
     subroutine MassiveNuVars(EV,y,a,grho,gpres,dgrho,dgq, wnu_arr, dgp)
         ! Original code:
         ! subroutine MassiveNuVars(EV,y,a,grho,gpres,dgrho,dgq, wnu_arr)
@@ -1242,7 +1242,7 @@
         type(EvolutionVars) EV
         real(dl) :: y(EV%nvar), a, grho,gpres,dgrho,dgq
         real(dl), intent(out), optional :: wnu_arr(max_nu)
-        ! EFTCAMB MOD START: compatibility with massive neutrinos        
+        ! EFTCAMB MOD START: compatibility with massive neutrinos
         real(dl), intent(out), optional :: dgp
         ! EFTCAMB MOD END.
 
@@ -1279,7 +1279,7 @@
         dgrho= dgrho + grhonu_t*clxnu
         dgq  = dgq   + grhonu_t*qnu
 
-            ! EFTCAMB MOD START: compatibility with massive neutrinos        
+            ! EFTCAMB MOD START: compatibility with massive neutrinos
             if (present(dgp)) then
                 dgp = dgp + gpnu_t*clxnu
             end if
@@ -1329,9 +1329,9 @@
         ! Background quantities.
         real(dl) EFTc, EFTLambda, EFTcdot, EFTLambdadot
         real(dl) EFTgrhoq, EFTgpresq, EFTgrhodotq, EFTgpresdotq
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
-        real(dl) EFT_gpinudotdot, EFT_gpinudotdot_tot, EFT_gpipinudotdot            
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
+        real(dl) EFT_gpinudotdot, EFT_gpinudotdot_tot, EFT_gpipinudotdot
         ! perturbations quantities.
         real(dl) EFTpiA, EFTpiB, EFTpiC, EFTpiD, EFTpiE                 ! pi field equations
         real(dl) EFTeomF, EFTeomN, EFTeomX, EFTeomY, EFTeomG, EFTeomU   ! equations of motion
@@ -1884,7 +1884,7 @@
  				! !phi_lens = Phi - 1/2 kappa (a/k)^2 sum_i rho_i pi_i
                 ! phi = -(dgrho +3*dgq*adotoa/k)/(k2*EV%Kf(1)*2) - dgpi/k2/2
                 ! sources(3) = -2*phi*f_K(tau-tau_maxvis)/(f_K(CP%tau0-tau_maxvis)*f_K(CP%tau0-tau))
-                !         sources(3) = -2*phi*(tau-tau_maxvis)/((CP%tau0-tau_maxvis)*(CP%tau0-tau))                
+                !         sources(3) = -2*phi*(tau-tau_maxvis)/((CP%tau0-tau_maxvis)*(CP%tau0-tau))
                 ! EFTCAMB MOD END
 		else
             sources(3) = 0
@@ -2431,7 +2431,7 @@
     real(dl) grho,gpres,dgrho,dgq,a
     real, target :: Arr(:)
     real(dl) y(EV%nvar),yprime(EV%nvar)
-   
+
     yprime = 0
     EV%OutputTransfer =>  Arr
     call derivs(EV,EV%ScalEqsToPropagate,tau,y,yprime)
@@ -2483,14 +2483,15 @@
         ! Background quantities.
         real(dl) EFTc, EFTLambda, EFTcdot, EFTLambdadot
         real(dl) EFTgrhoq, EFTgpresq, EFTgrhodotq, EFTgpresdotq
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
-        real(dl) EFT_dgpnu                                                          
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
+        real(dl) EFT_dgpnu
         ! perturbations quantities.
         real(dl) EFTpiA, EFTpiB, EFTpiC, EFTpiD, EFTpiE                 ! pi field equations
         real(dl) EFTeomF, EFTeomN, EFTeomX, EFTeomY, EFTeomG, EFTeomU   ! equations of motion
         real(dl) EFTeomL, EFTeomM, EFTeomV, EFTeomNdot, EFTeomVdot, EFTeomXdot
         real(dl) pidotdot
+        real(dl) EFTLensing
         ! Debug quantities
         real(dl) temp1, temp2, temp3,temp4, temp5, temp6, temp7
         ! EFTCAMB MOD END
@@ -2560,10 +2561,10 @@
     !  8*pi*a*a*SUM[(rho_i+p_i)*v_i]
     dgq=grhob_t*vb
 
-        ! EFTCAMB MOD START: compatibility with massive neutrinos.          
+        ! EFTCAMB MOD START: compatibility with massive neutrinos.
         EFT_dgpnu = 0._dl
         if (CP%Num_Nu_Massive > 0) then
-           call MassiveNuVars(EV,ay,a,grho_matter,gpres,dgrho_matter,dgq, wnu_arr, dgp=EFT_dgpnu) 
+           call MassiveNuVars(EV,ay,a,grho_matter,gpres,dgrho_matter,dgq, wnu_arr, dgp=EFT_dgpnu)
            !call MassiveNuVars(EV,ay,a,grho,gpres,dgrho,dgq, wnu_arr=wnu_arr, dgp=EFT_dgpnu)
         end if
         ! Original code:
@@ -3047,7 +3048,7 @@
         ! EFTCAMB MOD END
 
     if (associated(EV%OutputTransfer)) then
-        EV%OutputTransfer(Transfer_kh) = k/(CP%h0/100._dl) 
+        EV%OutputTransfer(Transfer_kh) = k/(CP%h0/100._dl)
         EV%OutputTransfer(Transfer_cdm) = clxc
         EV%OutputTransfer(Transfer_b) = clxb
         EV%OutputTransfer(Transfer_g) = clxg
@@ -3061,8 +3062,16 @@
         EV%OutputTransfer(Transfer_tot) =  dgrho_matter/grho_matter !includes neutrinos
         EV%OutputTransfer(Transfer_nonu) = (grhob_t*clxb+grhoc_t*clxc)/(grhob_t + grhoc_t)
         EV%OutputTransfer(Transfer_tot_de) =  dgrho/grho_matter
-        !Transfer_Weyl is k^2Phi, where Phi is the Weyl potential
-        EV%OutputTransfer(Transfer_Weyl) = -(dgrho +3*dgq*adotoa/k)/(EV%Kf(1)*2) - dgpi/2
+
+        !Transfer_Weyl is k^2Phi, where Phi is the Weyl potential IW
+        EFTLensing = 1._dl/EFTeomX*(-2._dl*adotoa*(1._dl+EFTeomV)*sigma +(1._dl+EFTeomX)*etak&
+                   & -1._dl/k*dgpi/(1._dl+EFTOmegaV) +EFTeomN/EFT_H0)
+        if (CP%EFTflag==0 .or. .not. EV%EFTCAMBactive) then
+            EV%OutputTransfer(Transfer_Weyl) = -(dgrho +3*dgq*adotoa/k)/(EV%Kf(1)*2) - dgpi/2
+        else if (CP%EFTflag/=0 .and. EV%EFTCAMBactive) then
+            EV%OutputTransfer(Transfer_Weyl) = 0.5_dl*k*EFTLensing
+        end if
+
         EV%OutputTransfer(Transfer_Newt_vel_cdm)=  -k*sigma/adotoa
         EV%OutputTransfer(Transfer_Newt_vel_baryon) = -k*(vb + sigma)/adotoa
         EV%OutputTransfer(Transfer_vel_baryon_cdm) = vb
@@ -3741,8 +3750,8 @@
             grhob_t,grhor_t,grhoc_t,grhog_t,grhov_t, gpres, grho, adotoa, &
             dgrho, z, dz, adotdota, opacity, cs2, dopacity, tau, dgq, qr, qg
 
-        real(dl) wnu_arr(max_nu) 
-        integer nu_i             
+        real(dl) wnu_arr(max_nu)
+        integer nu_i
 
         ! background quantities.
         real(dl) EFT_H0,Hdot, Hdotdot, PiFieldScale
@@ -3753,9 +3762,9 @@
         ! Background quantities.
         real(dl) EFTc, EFTLambda, EFTcdot, EFTLambdadot
         real(dl) EFTgrhoq, EFTgpresq, EFTgrhodotq, EFTgpresdotq
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
-        real(dl) EFT_dgpnu                                                          
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
+        real(dl) EFT_dgpnu
         ! perturbations quantities.
         real(dl) EFTpiA, EFTpiB, EFTpiC, EFTpiD, EFTpiE, EFTpiAdot, EFTpiEdot ! pi field equation.
         !
@@ -3794,7 +3803,7 @@
         dgq=grhob_t*vb
         EFT_dgpnu = 0._dl
 
-        if (CP%Num_Nu_Massive > 0) then     
+        if (CP%Num_Nu_Massive > 0) then
             call MassiveNuVars(EV,y,a,grho,gpres,dgrho,dgq, wnu_arr=wnu_arr, dgp=EFT_dgpnu)
         end if
 
@@ -4011,8 +4020,8 @@
 
         ! background quantities.
         real(dl) EFT_H0,Hdot, Hdotdot
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
         ! storage for EFT functions.
         real(dl) EFTOmegaV, EFTOmegaP, EFTOmegaPP, EFTOmegaPPP
         real(dl) EFTGamma1V, EFTGamma1P, EFTGamma2V, EFTGamma2P, EFTGamma3V, EFTGamma3P
@@ -4040,7 +4049,7 @@
         ! Massive neutrinos
         EFT_grhonu_tot = 0._dl
         EFT_gpinu_tot = 0._dl
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4072,7 +4081,7 @@
         EFT_grhonu_tot = 0._dl
         EFT_gpinudot_tot = 0._dl
 
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4090,7 +4099,7 @@
         Hdotdot = 2._dl*adotoa*Hdot &
             & + 0.5_dl*adotoa*(grhob_t + grhoc_t + 8._dl*(grhog_t+grhor_t)/3._dl)&
             & + 0.5_dl*adotoa*grhov_t*((1._dl+EFTw(a,0))*(1._dl+3._dl*EFTw(a,0))-a*EFTw(a,1))&
-            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot   
+            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot
 
         if ( CP%EFTflag==4 ) then ! Full mapping EFT overwrites some of these quantities:
             if ( CP%FullMappingEFTmodel==1 ) then ! Horava gravity
@@ -4158,8 +4167,8 @@
         real(dl) a2,k2,grhob_t,grhor_t,grhoc_t,grhog_t,grhov_t, gpres, grho, adotoa,adotdota
         ! background quantities.
         real(dl) EFT_H0,Hdot, Hdotdot
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
         ! storage for EFT functions.
         real(dl) EFTOmegaV, EFTOmegaP, EFTOmegaPP, EFTOmegaPPP
         real(dl) EFTGamma1V, EFTGamma1P, EFTGamma2V, EFTGamma2P, EFTGamma3V, EFTGamma3P
@@ -4191,7 +4200,7 @@
         ! Massive neutrinos
         EFT_grhonu_tot = 0._dl
         EFT_gpinu_tot = 0._dl
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4223,7 +4232,7 @@
         EFT_grhonu_tot = 0._dl
         EFT_gpinudot_tot = 0._dl
 
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4241,7 +4250,7 @@
         Hdotdot = 2._dl*adotoa*Hdot &
             & + 0.5_dl*adotoa*(grhob_t + grhoc_t + 8._dl*(grhog_t+grhor_t)/3._dl)&
             & + 0.5_dl*adotoa*grhov_t*((1._dl+EFTw(a,0))*(1._dl+3._dl*EFTw(a,0))-a*EFTw(a,1))&
-            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot   
+            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot
 
         if ( CP%EFTflag==4 ) then ! Full mapping EFT overwrites some of these quantities:
             if ( CP%FullMappingEFTmodel==1 ) then ! Horava gravity
@@ -4351,8 +4360,8 @@
         real(dl) a2,k2,grhob_t,grhor_t,grhoc_t,grhog_t,grhov_t, gpres, grho, adotoa,adotdota
         ! background quantities.
         real(dl) EFT_H0,Hdot, Hdotdot
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
         ! storage for EFT functions.
         real(dl) EFTOmegaV, EFTOmegaP, EFTOmegaPP, EFTOmegaPPP
         real(dl) EFTGamma1V, EFTGamma1P, EFTGamma2V, EFTGamma2P, EFTGamma3V, EFTGamma3P
@@ -4384,7 +4393,7 @@
         ! Massive neutrinos
         EFT_grhonu_tot = 0._dl
         EFT_gpinu_tot  = 0._dl
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4416,7 +4425,7 @@
         EFT_grhonu_tot = 0._dl
         EFT_gpinudot_tot = 0._dl
 
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4547,8 +4556,8 @@
         real(dl) a2,k2,grhob_t,grhor_t,grhoc_t,grhog_t,grhov_t, gpres, grho, adotoa,adotdota
         ! background quantities.
         real(dl) EFT_H0,Hdot, Hdotdot
-        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t    
-        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot 
+        real(dl) EFT_grhonu, EFT_gpinu, EFT_grhonudot, EFT_gpinudot, grhormass_t
+        real(dl) EFT_grhonudot_tot, EFT_grhonu_tot, EFT_gpinu_tot, EFT_gpinudot_tot
         ! storage for EFT functions.
         real(dl) EFTOmegaV, EFTOmegaP, EFTOmegaPP, EFTOmegaPPP
         real(dl) EFTGamma1V, EFTGamma1P, EFTGamma2V, EFTGamma2P, EFTGamma3V, EFTGamma3P
@@ -4580,7 +4589,7 @@
         ! Massive neutrinos
         EFT_grhonu_tot = 0._dl
         EFT_gpinu_tot  = 0._dl
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4613,7 +4622,7 @@
         EFT_grhonu_tot = 0._dl
         EFT_gpinudot_tot = 0._dl
 
-        if (CP%Num_Nu_Massive /= 0) then                                            
+        if (CP%Num_Nu_Massive /= 0) then
             do nu_i = 1, CP%Nu_mass_eigenstates
                 EFT_grhonu    = 0._dl
                 EFT_gpinu     = 0._dl
@@ -4631,7 +4640,7 @@
         Hdotdot = 2._dl*adotoa*Hdot &
             & + 0.5_dl*adotoa*(grhob_t + grhoc_t + 8._dl*(grhog_t+grhor_t)/3._dl)&
             & + 0.5_dl*adotoa*grhov_t*((1._dl+EFTw(a,0))*(1._dl+3._dl*EFTw(a,0))-a*EFTw(a,1))&
-            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot   
+            & + adotoa/6._dl*EFT_grhonu_tot -0.5_dl*adotoa*EFT_gpinu_tot -0.5_dl*EFT_gpinudot_tot
 
         if ( CP%EFTflag==4 ) then ! Full mapping EFT overwrites some of these quantities:
             if ( CP%FullMappingEFTmodel==1 ) then ! Horava gravity
