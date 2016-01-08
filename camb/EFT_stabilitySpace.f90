@@ -2264,7 +2264,7 @@ program EFTStabilityInPSpace
     P%omegav  = 1-(P%omegab+P%omegac+P%omegan)
 
     ! stability flags:
-    P%EFT_mathematical_stability = .false.
+    P%EFT_mathematical_stability = .false. 
     P%EFT_physical_stability     = .true.
     P%EFTAdditionalPriors        = .true.
     P%MinkowskyPriors            = .true.
@@ -2272,7 +2272,7 @@ program EFTStabilityInPSpace
     ! 2) fix other cosmological parameters that are not used unless testCls is set to true:
 
     ! This will call CAMB_GetResults for all the parameters that pass the stability check. Usefull for testing.
-    testCls = .false.
+    testCls = .false. 
 
     if (testCls) then
         ! This will print sigma 8 for all the models that pass the stability check and that call Cls.
@@ -2282,6 +2282,7 @@ program EFTStabilityInPSpace
         EFTCAMBuseinCOSMOMC = 0
 
         P%yhe    = 0.24
+        P%InitPower%ScalarPowerAmp = 2e-9 !added by ckreisch
         P%InitPower%nn     = 1 !number of initial power spectra
         P%InitPower%an(1)  = 1 !scalar spectral index
         P%InitPower%ant(1) = 0 !tensor spectra index
