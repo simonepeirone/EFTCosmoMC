@@ -2914,7 +2914,7 @@
             dz=1._dl/EFTeomU*(-2*adotoa*(1._dl+EFTeomY)*z +etak -0.5_dl/k/(1._dl+EFTOmegaV)*(grhog_t*clxg+grhor_t*clxr)&
                 & -1.5_dl/k/(1._dl+EFTOmegaV)*EFTeomM/EFT_H0)
             sigma= 1._dl/EFTeomX*(z*EFTeomU +1.5_dl*dgq/(k2*(1._dl+EFTOmegaV)) +EFTeomF/EFT_H0)
-            ayprime(2)=0.5_dl*dgq/(1._dl+EFTOmegaV) + k2/3._dl*EFTeomF/EFT_H0
+            ayprime(2) = ( 0.5_dl*dgq/(1._dl+EFTOmegaV) + k2/3._dl*EFTeomF/EFT_H0 + k2/3._dl*(EFTeomU-EFTeomX)*z )/EFTeomX
         end if
         ! Original code:
         ! z=(0.5_dl*dgrho/k + etak)/adotoa
