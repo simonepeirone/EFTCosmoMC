@@ -19,9 +19,6 @@ python $exec $path_to_data_1/1_GR $path_to_data_2/1_GR $path_to_res 'GR V1' 'GR 
 python $exec $path_to_data_1/2_PEFT_gamma1_const $path_to_data_2/2_PEFT_gamma1_const $path_to_res '2_PEFT_gamma1 V1' '2_PEFT_gamma1'
 python $exec $path_to_data_1/2_PEFT_gamma2_const $path_to_data_2/2_PEFT_gamma2_const $path_to_res '2_PEFT_gamma2 V1' '2_PEFT_gamma2'
 python $exec $path_to_data_1/2_PEFT_gamma3_const $path_to_data_2/2_PEFT_gamma3_const $path_to_res '2_PEFT_gamma3 V1' '2_PEFT_gamma3'
-python $exec $path_to_data_1/2_PEFT_gamma4_const $path_to_data_2/2_PEFT_gamma4_const $path_to_res '2_PEFT_gamma4 V1' '2_PEFT_gamma4'
-python $exec $path_to_data_1/2_PEFT_gamma5_const $path_to_data_2/2_PEFT_gamma5_const $path_to_res '2_PEFT_gamma5 V1' '2_PEFT_gamma5'
-python $exec $path_to_data_1/2_PEFT_gamma6_const $path_to_data_2/2_PEFT_gamma6_const $path_to_res '2_PEFT_gamma6 V1' '2_PEFT_gamma6'
 python $exec $path_to_data_1/2_PEFT_Omega_const $path_to_data_2/2_PEFT_Omega_const $path_to_res '2_PEFT_Omega V1' '2_PEFT_Omega'
 python $exec $path_to_data_1/3_Des_5E $path_to_data_2/3_Des_5E $path_to_res '3_Des_5E V1' '3_Des_5E'
 python $exec $path_to_data_1/3_Des_F_R_1 $path_to_data_2/3_Des_F_R_1 $path_to_res '3_Des_F_R_1 V1' '3_Des_F_R_1'
@@ -29,7 +26,6 @@ python $exec $path_to_data_1/3_Des_F_R_2 $path_to_data_2/3_Des_F_R_2 $path_to_re
 python $exec $path_to_data_1/4_RPH_1 $path_to_data_2/4_RPH_1 $path_to_res '4_RPH_1 V1' '4_RPH_1'
 python $exec $path_to_data_1/4_RPH_2 $path_to_data_2/4_RPH_2 $path_to_res '4_RPH_2 V1' '4_RPH_2'
 python $exec $path_to_data_1/5_Horava_eta $path_to_data_2/5_Horava_eta $path_to_res 'Horava eta V1' 'Horava eta'
-python $exec $path_to_data_1/5_Horava_lambda_1 $path_to_data_2/5_Horava_lambda_1 $path_to_res 'Horava lambda V1' 'Horava lambda'
 python $exec $path_to_data_1/5_Horava_SolSyst $path_to_data_2/5_Horava_SolSyst $path_to_res 'Horava Sol Syst V1' 'Horava Sol Syst'
 
 echo 'done.'
