@@ -765,6 +765,7 @@
     subroutine CAMBCalc_InitCAMBParams(this,P)
     ! EFTCOSMOMC MOD START: we need to use this to tell EFTCAMB that it's running from CosmoMC
     use EFTdef
+    use compile_time_eft
     ! EFTCOSMOMC MOD END.
     use lensing
     use ModelParams
@@ -803,30 +804,55 @@
 
     ! EFTCOSMOMC MOD START: pass model selection flag to the camb ! MR NEW
 
-    P%EFTflag = CosmoSettings%EFTflag
+    if ( .not. compile_time_eftcamb ) then
 
-    P%EFTwDE = CosmoSettings%EFTwDE
+        P%EFTflag = CosmoSettings%EFTflag
 
-    P%PureEFTmodelOmega  = CosmoSettings%PureEFTmodelOmega
-    P%PureEFTmodelGamma1 = CosmoSettings%PureEFTmodelGamma1
-    P%PureEFTmodelGamma2 = CosmoSettings%PureEFTmodelGamma2
-    P%PureEFTmodelGamma3 = CosmoSettings%PureEFTmodelGamma3
-    P%PureEFTmodelGamma4 = CosmoSettings%PureEFTmodelGamma4
-    P%PureEFTmodelGamma5 = CosmoSettings%PureEFTmodelGamma5
-    P%PureEFTmodelGamma6 = CosmoSettings%PureEFTmodelGamma6
+        P%PureEFTmodelOmega  = CosmoSettings%PureEFTmodelOmega
+        P%PureEFTmodelGamma1 = CosmoSettings%PureEFTmodelGamma1
+        P%PureEFTmodelGamma2 = CosmoSettings%PureEFTmodelGamma2
+        P%PureEFTmodelGamma3 = CosmoSettings%PureEFTmodelGamma3
+        P%PureEFTmodelGamma4 = CosmoSettings%PureEFTmodelGamma4
+        P%PureEFTmodelGamma5 = CosmoSettings%PureEFTmodelGamma5
+        P%PureEFTmodelGamma6 = CosmoSettings%PureEFTmodelGamma6
 
-    P%DesignerEFTmodel = CosmoSettings%DesignerEFTmodel
-    P%AltParEFTmodel   = CosmoSettings%AltParEFTmodel
-    P%FullMappingEFTmodel = CosmoSettings%FullMappingEFTmodel
+        P%DesignerEFTmodel = CosmoSettings%DesignerEFTmodel
+        P%AltParEFTmodel   = CosmoSettings%AltParEFTmodel
+        P%FullMappingEFTmodel = CosmoSettings%FullMappingEFTmodel
 
-    P%PureEFTHorndeski = CosmoSettings%PureEFTHorndeski
+        P%EFTwDE = CosmoSettings%EFTwDE
+        P%PureEFTHorndeski = CosmoSettings%PureEFTHorndeski
+        P%RPHmassPmodel      = CosmoSettings%RPHmassPmodel
+        P%RPHkineticitymodel = CosmoSettings%RPHkineticitymodel
+        P%RPHbraidingmodel   = CosmoSettings%RPHbraidingmodel
+        P%RPHtensormodel     = CosmoSettings%RPHtensormodel
+        P%HoravaSolarSystem  = CosmoSettings%HoravaSolarSystem
 
-    P%RPHmassPmodel      = CosmoSettings%RPHmassPmodel
-    P%RPHkineticitymodel = CosmoSettings%RPHkineticitymodel
-    P%RPHbraidingmodel   = CosmoSettings%RPHbraidingmodel
-    P%RPHtensormodel     = CosmoSettings%RPHtensormodel
+    else if ( compile_time_eftcamb ) then
 
-    P%HoravaSolarSystem  = CosmoSettings%HoravaSolarSystem
+        P%EFTflag = CT_EFTflag
+
+        P%PureEFTmodelOmega  = CT_PureEFTmodelOmega
+        P%PureEFTmodelGamma1 = CT_PureEFTmodelGamma1
+        P%PureEFTmodelGamma2 = CT_PureEFTmodelGamma2
+        P%PureEFTmodelGamma3 = CT_PureEFTmodelGamma3
+        P%PureEFTmodelGamma4 = CT_PureEFTmodelGamma4
+        P%PureEFTmodelGamma5 = CT_PureEFTmodelGamma5
+        P%PureEFTmodelGamma6 = CT_PureEFTmodelGamma6
+
+        P%DesignerEFTmodel    = CT_DesignerEFTmodel
+        P%AltParEFTmodel      = CT_AltParEFTmodel
+        P%FullMappingEFTmodel = CT_FullMappingEFTmodel
+
+        P%EFTwDE             = CT_EFTwDE
+        P%PureEFTHorndeski   = CT_PureEFTHorndeski
+        P%RPHmassPmodel      = CT_RPHmassPmodel
+        P%RPHkineticitymodel = CT_RPHkineticitymodel
+        P%RPHbraidingmodel   = CT_RPHbraidingmodel
+        P%RPHtensormodel     = CT_RPHtensormodel
+        P%HoravaSolarSystem  = CT_HoravaSolarSystem
+
+    end if
 
     ! stability flags:
     P%EFT_mathematical_stability = CosmoSettings%EFT_mathematical_stability

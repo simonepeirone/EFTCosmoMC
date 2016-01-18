@@ -1,9 +1,9 @@
-    !     Code for Anisotropies in the Microwave Background
-    !     by Antony Lewis (http://cosmologist.info/) and Anthony Challinor
-    !     See readme.html for documentation. This is a sample driver routine that reads
-    !     in one set of parameters and produdes the corresponding output.
+!     Code for Anisotropies in the Microwave Background
+!     by Antony Lewis (http://cosmologist.info/) and Anthony Challinor
+!     See readme.html for documentation. This is a sample driver routine that reads
+!     in one set of parameters and produdes the corresponding output.
 
-    program driver
+program driver
     use IniFile
     use CAMB
     use LambdaGeneral
@@ -18,20 +18,21 @@
     use F90_UNIX
 #endif
 
-! EFTCAMB MOD START
-        use EFTdef
-! EFTCAMB MOD END
+    ! EFTCAMB MOD START
+    use EFTdef
+    use compile_time_eft
+    ! EFTCAMB MOD END
 
     implicit none
 
     Type(CAMBparams) P
 
     character(LEN=Ini_max_string_len) numstr, VectorFileName, &
-    InputFile, ScalarFileName, TensorFileName, TotalFileName, LensedFileName,&
-    LensedTotFileName, LensPotentialFileName,ScalarCovFileName
+        InputFile, ScalarFileName, TensorFileName, TotalFileName, LensedFileName,&
+        LensedTotFileName, LensPotentialFileName,ScalarCovFileName
     integer i
     character(LEN=Ini_max_string_len) TransferFileNames(max_transfer_redshifts), &
-    MatterPowerFileNames(max_transfer_redshifts), outroot, version_check
+        MatterPowerFileNames(max_transfer_redshifts), outroot, version_check
     real(dl) output_factor, nmassive
 
 #ifdef WRITE_FITS
@@ -123,86 +124,120 @@
 
     P%tcmb   = Ini_Read_Double('temp_cmb',COBE_CMBTemp)
 
-! EFTCAMB MOD START
+    ! EFTCAMB MOD START
 
     ! 1) Initialization of EFTCAMB flags.
 
-         P%EFTflag = Ini_Read_Int('EFTflag',0)
+    if ( .not. compile_time_eftcamb ) then
 
-         P%PureEFTmodelOmega  = Ini_Read_Int('PureEFTmodelOmega',0)
-         P%PureEFTmodelGamma1 = Ini_Read_Int('PureEFTmodelGamma1',0)
-         P%PureEFTmodelGamma2 = Ini_Read_Int('PureEFTmodelGamma2',0)
-         P%PureEFTmodelGamma3 = Ini_Read_Int('PureEFTmodelGamma3',0)
-         P%PureEFTmodelGamma4 = Ini_Read_Int('PureEFTmodelGamma4',0)
-         P%PureEFTmodelGamma5 = Ini_Read_Int('PureEFTmodelGamma5',0)
-         P%PureEFTmodelGamma6 = Ini_Read_Int('PureEFTmodelGamma6',0)
+        P%EFTflag = Ini_Read_Int('EFTflag',0)
 
-         P%DesignerEFTmodel = Ini_Read_Int('DesignerEFTmodel',1)
-         P%AltParEFTmodel   = Ini_Read_Int('AltParEFTmodel',1)
-         P%FullMappingEFTmodel = Ini_Read_Int('FullMappingEFTmodel',1)
+        P%PureEFTmodelOmega  = Ini_Read_Int('PureEFTmodelOmega',0)
+        P%PureEFTmodelGamma1 = Ini_Read_Int('PureEFTmodelGamma1',0)
+        P%PureEFTmodelGamma2 = Ini_Read_Int('PureEFTmodelGamma2',0)
+        P%PureEFTmodelGamma3 = Ini_Read_Int('PureEFTmodelGamma3',0)
+        P%PureEFTmodelGamma4 = Ini_Read_Int('PureEFTmodelGamma4',0)
+        P%PureEFTmodelGamma5 = Ini_Read_Int('PureEFTmodelGamma5',0)
+        P%PureEFTmodelGamma6 = Ini_Read_Int('PureEFTmodelGamma6',0)
+
+        P%DesignerEFTmodel = Ini_Read_Int('DesignerEFTmodel',1)
+        P%AltParEFTmodel   = Ini_Read_Int('AltParEFTmodel',1)
+        P%FullMappingEFTmodel = Ini_Read_Int('FullMappingEFTmodel',1)
+
+    else if ( compile_time_eftcamb ) then
+
+        P%EFTflag = CT_EFTflag
+
+        P%PureEFTmodelOmega  = CT_PureEFTmodelOmega
+        P%PureEFTmodelGamma1 = CT_PureEFTmodelGamma1
+        P%PureEFTmodelGamma2 = CT_PureEFTmodelGamma2
+        P%PureEFTmodelGamma3 = CT_PureEFTmodelGamma3
+        P%PureEFTmodelGamma4 = CT_PureEFTmodelGamma4
+        P%PureEFTmodelGamma5 = CT_PureEFTmodelGamma5
+        P%PureEFTmodelGamma6 = CT_PureEFTmodelGamma6
+
+        P%DesignerEFTmodel    = CT_DesignerEFTmodel
+        P%AltParEFTmodel      = CT_AltParEFTmodel
+        P%FullMappingEFTmodel = CT_FullMappingEFTmodel
+
+    end if
 
     ! 2) Initialization of EFTCAMB model properties flags.
 
-         ! read the DE eos model selection flag:
-         P%EFTwDE = Ini_Read_Int('EFTwDE',0)
-         ! read pure EFT Horndeski model selection flag:
-         P%PureEFTHorndeski = Ini_Read_Logical('PureEFTHorndeski',.false.)
-         ! read RPH model selection flags:
-         P%RPHmassPmodel      = Ini_Read_Int('RPHmassPmodel',0)
-         P%RPHkineticitymodel = Ini_Read_Int('RPHkineticitymodel',0)
-         P%RPHbraidingmodel   = Ini_Read_Int('RPHbraidingmodel',0)
-         P%RPHtensormodel     = Ini_Read_Int('RPHtensormodel',0)
-         ! read the Horava Solar System Free flag:
-         P%HoravaSolarSystem  = Ini_Read_Logical('HoravaSolarSystem',.false.)
+    if ( .not. compile_time_eftcamb ) then
+
+        ! read the DE eos model selection flag:
+        P%EFTwDE = Ini_Read_Int('EFTwDE',0)
+        ! read pure EFT Horndeski model selection flag:
+        P%PureEFTHorndeski = Ini_Read_Logical('PureEFTHorndeski',.false.)
+        ! read RPH model selection flags:
+        P%RPHmassPmodel      = Ini_Read_Int('RPHmassPmodel',0)
+        P%RPHkineticitymodel = Ini_Read_Int('RPHkineticitymodel',0)
+        P%RPHbraidingmodel   = Ini_Read_Int('RPHbraidingmodel',0)
+        P%RPHtensormodel     = Ini_Read_Int('RPHtensormodel',0)
+        ! read the Horava Solar System Free flag:
+        P%HoravaSolarSystem  = Ini_Read_Logical('HoravaSolarSystem',.false.)
+
+    else if ( compile_time_eftcamb ) then
+
+        P%EFTwDE             = CT_EFTwDE
+        P%PureEFTHorndeski   = CT_PureEFTHorndeski
+        P%RPHmassPmodel      = CT_RPHmassPmodel
+        P%RPHkineticitymodel = CT_RPHkineticitymodel
+        P%RPHbraidingmodel   = CT_RPHbraidingmodel
+        P%RPHtensormodel     = CT_RPHtensormodel
+        P%HoravaSolarSystem  = CT_HoravaSolarSystem
+
+    end if
 
     ! 3) Initialization of EFTCAMB stability flags:
 
-         P%EFT_mathematical_stability = Ini_Read_Logical('EFT_mathematical_stability',.true.)
-         P%EFT_physical_stability     = Ini_Read_Logical('EFT_physical_stability',.true.)
-         P%EFTAdditionalPriors        = Ini_Read_Logical('EFTAdditionalPriors',.true.)
-         P%MinkowskyPriors            = Ini_Read_Logical('MinkowskyPriors',.true.)
+    P%EFT_mathematical_stability = Ini_Read_Logical('EFT_mathematical_stability',.true.)
+    P%EFT_physical_stability     = Ini_Read_Logical('EFT_physical_stability',.true.)
+    P%EFTAdditionalPriors        = Ini_Read_Logical('EFTAdditionalPriors',.true.)
+    P%MinkowskyPriors            = Ini_Read_Logical('MinkowskyPriors',.true.)
 
     ! 4) Initialization of EFTCAMB model parameters.
 
-         ! read the DE eos parameters:
-         P%EFTw0  = Ini_Read_Double('EFTw0',-1._dl)
-         P%EFTwa  = Ini_Read_Double('EFTwa',0._dl)
-         P%EFTwn  = Ini_Read_Double('EFTwn',2._dl)
-         P%EFTwat = Ini_Read_Double('EFTwat',1._dl)
-         P%EFtw2  = Ini_Read_Double('EFtw2',0._dl)
-         P%EFTw3  = Ini_Read_Double('EFTw3',0._dl)
-         ! read pure EFT parameters:
-         P%EFTOmega0    = Ini_Read_Double('EFTOmega0', 0.0_dl)
-         P%EFTOmegaExp  = Ini_Read_Double('EFTOmegaExp', 0.0_dl)
-         P%EFTGamma10   = Ini_Read_Double('EFTGamma10', 0.0_dl)
-         P%EFTGamma1Exp = Ini_Read_Double('EFTGamma1Exp', 0.0_dl)
-         P%EFTGamma20   = Ini_Read_Double('EFTGamma20', 0.0_dl)
-         P%EFTGamma2Exp = Ini_Read_Double('EFTGamma2Exp', 0.0_dl)
-         P%EFTGamma30   = Ini_Read_Double('EFTGamma30', 0.0_dl)
-         P%EFTGamma3Exp = Ini_Read_Double('EFTGamma3Exp', 0.0_dl)
-         P%EFTGamma40   = Ini_Read_Double('EFTGamma40', 0.0_dl)
-         P%EFTGamma4Exp = Ini_Read_Double('EFTGamma4Exp', 0.0_dl)
-         P%EFTGamma50   = Ini_Read_Double('EFTGamma50', 0.0_dl)
-         P%EFTGamma5Exp = Ini_Read_Double('EFTGamma5Exp', 0.0_dl)
-         P%EFTGamma60   = Ini_Read_Double('EFTGamma60', 0.0_dl)
-         P%EFTGamma6Exp = Ini_Read_Double('EFTGamma6Exp', 0.0_dl)
-         ! read f(R) parameters:
-         P%EFTB0 = Ini_Read_Double('EFTB0', 0.0_dl)
-         ! read RPH parameters:
-         P%RPHmassP0        = Ini_Read_Double('RPHmassP0', 0.0_dl)
-         P%RPHmassPexp      = Ini_Read_Double('RPHmassPexp', 0.0_dl)
-         P%RPHkineticity0   = Ini_Read_Double('RPHkineticity0', 0.0_dl)
-         P%RPHkineticityexp = Ini_Read_Double('RPHkineticityexp', 0.0_dl)
-         P%RPHbraiding0     = Ini_Read_Double('RPHbraiding0', 0.0_dl)
-         P%RPHbraidingexp   = Ini_Read_Double('RPHbraidingexp', 0.0_dl)
-         P%RPHtensor0       = Ini_Read_Double('RPHtensor0', 0.0_dl)
-         P%RPHtensorexp     = Ini_Read_Double('RPHtensorexp', 0.0_dl)
-         ! read Horava parameters:
-         P%Horava_xi      = Ini_Read_Double('Horava_xi', 0.0_dl)
-         P%Horava_lambda  = Ini_Read_Double('Horava_lambda', 0.0_dl)
-         P%Horava_eta     = Ini_Read_Double('Horava_eta', 0.0_dl)
+    ! read the DE eos parameters:
+    P%EFTw0  = Ini_Read_Double('EFTw0',-1._dl)
+    P%EFTwa  = Ini_Read_Double('EFTwa',0._dl)
+    P%EFTwn  = Ini_Read_Double('EFTwn',2._dl)
+    P%EFTwat = Ini_Read_Double('EFTwat',1._dl)
+    P%EFtw2  = Ini_Read_Double('EFtw2',0._dl)
+    P%EFTw3  = Ini_Read_Double('EFTw3',0._dl)
+    ! read pure EFT parameters:
+    P%EFTOmega0    = Ini_Read_Double('EFTOmega0', 0.0_dl)
+    P%EFTOmegaExp  = Ini_Read_Double('EFTOmegaExp', 0.0_dl)
+    P%EFTGamma10   = Ini_Read_Double('EFTGamma10', 0.0_dl)
+    P%EFTGamma1Exp = Ini_Read_Double('EFTGamma1Exp', 0.0_dl)
+    P%EFTGamma20   = Ini_Read_Double('EFTGamma20', 0.0_dl)
+    P%EFTGamma2Exp = Ini_Read_Double('EFTGamma2Exp', 0.0_dl)
+    P%EFTGamma30   = Ini_Read_Double('EFTGamma30', 0.0_dl)
+    P%EFTGamma3Exp = Ini_Read_Double('EFTGamma3Exp', 0.0_dl)
+    P%EFTGamma40   = Ini_Read_Double('EFTGamma40', 0.0_dl)
+    P%EFTGamma4Exp = Ini_Read_Double('EFTGamma4Exp', 0.0_dl)
+    P%EFTGamma50   = Ini_Read_Double('EFTGamma50', 0.0_dl)
+    P%EFTGamma5Exp = Ini_Read_Double('EFTGamma5Exp', 0.0_dl)
+    P%EFTGamma60   = Ini_Read_Double('EFTGamma60', 0.0_dl)
+    P%EFTGamma6Exp = Ini_Read_Double('EFTGamma6Exp', 0.0_dl)
+    ! read f(R) parameters:
+    P%EFTB0 = Ini_Read_Double('EFTB0', 0.0_dl)
+    ! read RPH parameters:
+    P%RPHmassP0        = Ini_Read_Double('RPHmassP0', 0.0_dl)
+    P%RPHmassPexp      = Ini_Read_Double('RPHmassPexp', 0.0_dl)
+    P%RPHkineticity0   = Ini_Read_Double('RPHkineticity0', 0.0_dl)
+    P%RPHkineticityexp = Ini_Read_Double('RPHkineticityexp', 0.0_dl)
+    P%RPHbraiding0     = Ini_Read_Double('RPHbraiding0', 0.0_dl)
+    P%RPHbraidingexp   = Ini_Read_Double('RPHbraidingexp', 0.0_dl)
+    P%RPHtensor0       = Ini_Read_Double('RPHtensor0', 0.0_dl)
+    P%RPHtensorexp     = Ini_Read_Double('RPHtensorexp', 0.0_dl)
+    ! read Horava parameters:
+    P%Horava_xi      = Ini_Read_Double('Horava_xi', 0.0_dl)
+    P%Horava_lambda  = Ini_Read_Double('Horava_lambda', 0.0_dl)
+    P%Horava_eta     = Ini_Read_Double('Horava_eta', 0.0_dl)
 
-! EFTCAMB MOD END
+    ! EFTCAMB MOD END
 
     P%yhe    = Ini_Read_Double('helium_fraction',0.24_dl)
     P%Num_Nu_massless  = Ini_Read_Double('massless_neutrinos')
@@ -238,7 +273,7 @@
     !P%Transfer%redshifts -> P%Transfer%PK_redshifts and P%Transfer%num_redshifts -> P%Transfer%PK_num_redshifts
     !in the P%WantTransfer loop.
     if (((P%NonLinear==NonLinear_lens .or. P%NonLinear==NonLinear_both) .and. P%DoLensing) &
-    .or. P%PK_WantTransfer) then
+        .or. P%PK_WantTransfer) then
         P%Transfer%high_precision=  Ini_Read_Logical('transfer_high_precision',.false.)
     else
         P%transfer%high_precision = .false.
@@ -265,9 +300,9 @@
                 MatterPowerFilenames(i) =  trim(numcat('matterpower_',i))//'.dat'
             end if
             if (TransferFileNames(i)/= '') &
-            TransferFileNames(i) = trim(outroot)//TransferFileNames(i)
+                TransferFileNames(i) = trim(outroot)//TransferFileNames(i)
             if (MatterPowerFilenames(i) /= '') &
-            MatterPowerFilenames(i)=trim(outroot)//MatterPowerFilenames(i)
+                MatterPowerFilenames(i)=trim(outroot)//MatterPowerFilenames(i)
         end do
     else
         P%Transfer%PK_num_redshifts = 1
@@ -417,7 +452,7 @@
 
     if (P%WantCls) then
         call output_cl_files(ScalarFileName, ScalarCovFileName, TensorFileName, TotalFileName, &
-        LensedFileName, LensedTotFilename, output_factor)
+            LensedFileName, LensedTotFilename, output_factor)
 
         call output_lens_pot_files(LensPotentialFileName, output_factor)
 
@@ -434,7 +469,7 @@
     stop
 
 100 stop 'Must give num_massive number of integer physical neutrinos for each eigenstate'
-    end program driver
+end program driver
 
 
 #ifdef RUNIDLE

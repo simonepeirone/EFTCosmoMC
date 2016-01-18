@@ -1440,9 +1440,17 @@ contains
 
     subroutine EFTCAMB_print_parameters
         ! This is used to print EFT parameters on the screen.
+
+        use compile_time_eft
+
         implicit none
 
         logical, parameter :: print_all = .false.
+
+        if ( compile_time_eftcamb ) then
+            write(*,*)
+            write(*,*) 'WARNING: EFTCAMB running with compile time model selection.'
+        end if
 
         write(*,*)
         write(*,*) 'EFTCAMB stability flags:'
