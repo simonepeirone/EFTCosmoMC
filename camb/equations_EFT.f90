@@ -1797,10 +1797,11 @@
             EFTsigmadot= 1._dl/EFTeomX*(-2._dl*adotoa*(1._dl+EFTeomV)*sigma +etak&
                 & -1._dl/k*dgpi/(1._dl+EFTOmegaV) +EFTeomN/EFT_H0)
             EFTISW     = 1._dl/EFTeomX*(-2._dl*(1._dl+EFTeomV)*(Hdot*sigma+ adotoa*EFTsigmadot)&
-                & -2._dl*adotoa*sigma*EFTeomVdot + 0.5_dl*dgq*(1._dl+EFTeomX)/(1._dl+EFTOmegaV)&
+                & -2._dl*adotoa*sigma*EFTeomVdot + 0.5_dl*dgq*(1._dl+EFTeomX)/EFTeomX/(1._dl+EFTOmegaV)&
                 & +a*adotoa*EFTOmegaP/k*dgpi/(1._dl+EFTOmegaV)**2&
                 & -1._dl/(1._dl+EFTOmegaV)*(2._dl*adotoa*dgpi/k+diff_rhopi/k)&
-                & +(1._dl+EFTeomX)*k2/3._dl/EFT_H0*EFTeomF-EFTeomXdot*EFTsigmadot+EFTeomNdot/EFT_H0)
+                & +(1._dl+EFTeomX)/EFTeomX*k2/3._dl/EFT_H0*EFTeomF +(1._dl+EFTeomX)/EFTeomX*k2/3._dl*(EFTeomU-EFTeomX)*z &
+                & -EFTeomXdot*EFTsigmadot+EFTeomNdot/EFT_H0)
             EFTLensing = 1._dl/EFTeomX*(-2._dl*adotoa*(1._dl+EFTeomV)*sigma +(1._dl+EFTeomX)*etak&
                 & -1._dl/k*dgpi/(1._dl+EFTOmegaV) +EFTeomN/EFT_H0)
         end if

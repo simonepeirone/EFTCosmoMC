@@ -1,39 +1,50 @@
+#
 # Script that plots all the spectra obtained with the spectra script.
+#
 
 #!/bin/bash
 
-cd ..
+TEST_FOLDER=./tests_EFT
 
+# do the spectra plotting:
+
+NPROCS=4  # number of parallel jobs, 4 is pretty fair.
+
+# definitions:
+PLOTTER=${TEST_FOLDER}/python/compare_Cls.py  # plotter
+PATH_TO_DATA=${TEST_FOLDER}/results/Spectra_results  # data, spectra results
+PATH_TO_RES=${TEST_FOLDER}/results/Spectra_Plots/  # path to results place
+
+REFERENCE_MODEL=${TEST_FOLDER}/results/Spectra_results/1_GR  # model to use as a reference
+
+# start the script:
 echo 'Plotting of test results. This might take a while.'
-
 echo 'Plotting spectra.'
-
 echo ; echo ; echo ;
+# go to the eftcamb root dir
+cd ..
+# define a counter to give the wait commands every NPROCS commands
+var=0
+# start the loop:
+for file in ${PATH_TO_DATA}/*_params.ini
+	do
+		
+	# get the file name:
+	fname=$(basename $file)
+	fname=${fname%_params.*}
+	# increment the counter
+	var=$((var+1))
+	# call the plotter
+	python $PLOTTER $REFERENCE_MODEL $PATH_TO_DATA/$fname $PATH_TO_RES '1_GR' $fname &
+	# wait if reached NPROCS jobs running
+	if [ $((var%NPROCS)) -eq 0 ] ; then 
+		wait
+	fi
 
-exec='tests_EFT/python/compare_Cls.py'
-path_to_data='tests_EFT/results/Spectra_results'
-path_to_res='tests_EFT/results/Spectra_Plots/'
-
-reference_model='tests_EFT/results/Spectra_results/1_GR'
-
-python $exec $reference_model $path_to_data/1_EFT_GR $path_to_res 'GR' 'EFTCAMB GR'
-python $exec $reference_model $path_to_data/2_PEFT_gamma1_const $path_to_res 'GR' 'Pure EFT $\gamma_1$'
-python $exec $reference_model $path_to_data/2_PEFT_gamma2_const $path_to_res 'GR' 'Pure EFT $\gamma_2$'
-python $exec $reference_model $path_to_data/2_PEFT_gamma3_const $path_to_res 'GR' 'Pure EFT $\gamma_3$ PEFT Horndeski'
-python $exec $reference_model $path_to_data/2_PEFT_Omega_const $path_to_res 'GR' 'Pure EFT $\Omega$'
-python $exec $reference_model $path_to_data/3_Des_5E $path_to_res 'GR' 'Designer mc 5e'
-python $exec $reference_model $path_to_data/3_Des_F_R_1 $path_to_res 'GR' '$f(R)$, $B_0=0.1$'
-python $exec $reference_model $path_to_data/3_Des_F_R_2 $path_to_res 'GR' '$f(R)$, $B_0=1.d-8$'
-python $exec $reference_model $path_to_data/4_RPH_1 $path_to_res 'GR' 'RPH mass and braiding'
-python $exec $reference_model $path_to_data/4_RPH_2 $path_to_res 'GR' 'RPH mass and kineticity'
-python $exec $reference_model $path_to_data/5_Horava_eta $path_to_res 'GR' 'Horava eta'
-python $exec $reference_model $path_to_data/5_Horava_SolSyst $path_to_res 'GR' 'Horava Sol Syst'
+done;
+# wait for all jobs to complete:
 wait
 
-echo ; echo ; echo ;
-echo 'Plotting stability.'
-echo ; echo ; echo ;
+echo 'Spectra plotting done.'
 
-cd tests_EFT/python/
-
-python stab_plot.py
+exit 0

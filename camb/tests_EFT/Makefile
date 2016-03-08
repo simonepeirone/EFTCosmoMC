@@ -1,29 +1,41 @@
 script_folder=test_scripts/
 
-all: legacy stability plot profile benchmark spectra
+all: spectra benchmark profile stability spectra_plot stability_plot legacy_plot
+
+default: spectra spectra_plot legacy_plot
+
+# results creation target:
 
 spectra:
-	./$(script_folder)test_spectra.sh
-
-plot:
-	./$(script_folder)test_plot.sh
+	@./$(script_folder)test_spectra.sh
 
 benchmark:
-	./$(script_folder)test_benchmark.sh
+	@./$(script_folder)test_benchmark.sh
 
 profile:
-	./$(script_folder)test_profile.sh
+	@./$(script_folder)test_profile.sh
 
 stability:
-	./$(script_folder)test_stability.sh
+	@./$(script_folder)test_stability.sh
 
+# plot target:
 
-legacy: spectra
-	./$(script_folder)legacy_comp_spectra.sh
+spectra_plot:
+	@./$(script_folder)test_plot.sh
+	
+stability_plot:
+	@./$(script_folder)test_stability_plot.sh
 
-create_legacy: spectra legacy
+legacy_plot:
+	@./$(script_folder)legacy_comp_spectra.sh
+
+# legacy creation target:
+
+create_legacy: spectra legacy_plot
 	@rm -rf results_legacy/Spectra_Legacy/*
 	@mv -f  results/Spectra_results/* results_legacy/Spectra_Legacy/
+
+# clean target:
 
 clean:
 	@rm -rf results/Spectra_results/*

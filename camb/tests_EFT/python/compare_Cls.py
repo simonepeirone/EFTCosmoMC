@@ -13,9 +13,10 @@ outroot  = sys.argv[3]
 
 print "Comparing: ", root1, " and ", root2
 
-if len(sys.argv) == 5:
+if len(sys.argv) == 6:
     label1   = sys.argv[4]
     label2   = sys.argv[5]
+    
     result = Cplt.CAMB_results_compare_plot(root1, root2, outroot,
                                         lensing=True, transfer=True, tensor=True,
                                         name1=label1, name2=label2)

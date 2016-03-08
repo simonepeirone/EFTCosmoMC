@@ -3,6 +3,7 @@
 
 # ignore the ECLIPSE project file
 .project
+.pydevproject
 
 # ignore compilation products
 *.mod
@@ -11,9 +12,8 @@
 *.pyc
 
 # ignore the executables
-cosmomc
-getdist
-eft_stability_sampler
+/cosmomc
+/getdist
 
 camb/camb
 camb/eftstability
