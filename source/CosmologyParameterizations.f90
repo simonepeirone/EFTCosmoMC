@@ -68,10 +68,7 @@
     if (CosmoSettings%compute_tensors) call Names%Add('paramnames/derived_tensors.paramnames')
     this%num_derived = Names%num_derived
     !set number of hard parameters, number of initial power spectrum parameters
-    ! EFTCOSMOMC MOD START:
-    !call this%SetTheoryParameterNumbers(16,last_power_index) !Original code
-    call this%SetTheoryParameterNumbers(48,last_power_index)
-    ! EFTCOSMOMC MOD END.
+    call this%SetTheoryParameterNumbers(16,last_power_index)
 
     end subroutine TP_Init
 
@@ -329,42 +326,6 @@
         CMB%ALensf = Params(15)
         CMB%fdm = Params(16)
         call SetFast(Params,CMB)
-
-        ! EFTCOSMOMC MOD START:
-        CMB%EFTw0 = Params(17)
-        CMB%EFTwa = Params(18)
-        CMB%EFTwn = Params(19)
-        CMB%EFTwat= Params(20)
-        CMB%EFtw2 = Params(21)
-        CMB%EFTw3 = Params(22)
-        CMB%EFTOmega0     = Params(23)
-        CMB%EFTOmegaExp   = Params(24)
-        CMB%EFTGamma10    = Params(25)
-        CMB%EFTGamma1Exp  = Params(26)
-        CMB%EFTGamma20    = Params(27)
-        CMB%EFTGamma2Exp  = Params(28)
-        CMB%EFTGamma30    = Params(29)
-        CMB%EFTGamma3Exp  = Params(30)
-        CMB%EFTGamma40    = Params(31)
-        CMB%EFTGamma4Exp  = Params(32)
-        CMB%EFTGamma50    = Params(33)
-        CMB%EFTGamma5Exp  = Params(34)
-        CMB%EFTGamma60    = Params(35)
-        CMB%EFTGamma6Exp  = Params(36)
-        CMB%EFTB0         = 10**Params(37)
-        CMB%RPHmassP0        = Params(38)
-        CMB%RPHmassPexp      = Params(39)
-        CMB%RPHkineticity0   = Params(40)
-        CMB%RPHkineticityexp = Params(41)
-        CMB%RPHbraiding0     = Params(42)
-        CMB%RPHbraidingexp   = Params(43)
-        CMB%RPHtensor0       = Params(44)
-        CMB%RPHtensorexp     = Params(45)
-        CMB%Horava_xi        = Params(46)
-        CMB%Horava_lambda    = 10.**(Params(47))
-        CMB%Horava_eta       = 10.**(Params(48))
-        ! EFTCOSMOMC MOD END.
-
     end if
 
     CMB%h = CMB%H0/100

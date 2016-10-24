@@ -3,16 +3,13 @@
     use CosmologyTypes
     use CosmoTheory
     use CAMB, only : CAMB_GetResults, CAMB_GetAge, CAMBParams, CAMB_SetDefParams, &
-        ! EFTCOSMOMC MOD START: remove ppf
-        AccuracyBoost,  Cl_scalar, Cl_tensor, Cl_lensed, outNone, w_lam,&
-        !AccuracyBoost,  Cl_scalar, Cl_tensor, Cl_lensed, outNone, w_lam, wa_ppf,& ! Original code.
-        ! EFTCOSMOMC MOD END.
+        AccuracyBoost,  Cl_scalar, Cl_tensor, Cl_lensed, outNone, w_lam, wa_ppf,&
         CAMBParams_Set, MT, CAMBdata, NonLinear_Pk, Nonlinear_lens, Reionization_GetOptDepth, CAMB_GetZreFromTau, &
         CAMB_GetTransfers,CAMB_FreeCAMBdata,CAMB_InitCAMBdata, CAMB_TransfersToPowers, Transfer_SetForNonlinearLensing, &
         initial_adiabatic,initial_vector,initial_iso_baryon,initial_iso_CDM, initial_iso_neutrino, initial_iso_neutrino_vel, &
         HighAccuracyDefault, highL_unlensed_cl_template, ThermoDerivedParams, nthermo_derived, BackgroundOutputs, &
-        Transfer_SortAndIndexRedshifts, & !JD added for nonlinear lensing of CMB + MPK compatibility
-    Recombination_Name, reionization_name, power_name, threadnum, version, tensor_param_rpivot
+        Transfer_SortAndIndexRedshifts,  &
+        Recombination_Name, reionization_name, power_name, threadnum, version, tensor_param_rpivot
     use Errors !CAMB
     use settings
     use likelihood
@@ -39,7 +36,7 @@
         real(mcp), allocatable :: highL_lensedCL_template(:,:)
     contains
     !New
-    !procedure :: CMBToCAMB => CAMBCalc_CMBToCAMB
+    procedure :: CMBToCAMB => CAMBCalc_CMBToCAMB
     procedure :: SetDerived => CAMBCalc_SetDerived
     procedure :: SetPowersFromCAMB => CAMBCalc_SetPowersFromCAMB
     procedure :: InitCAMB => CAMBCalc_InitCAMB
@@ -48,9 +45,6 @@
     procedure :: SetPkFromCAMB => CAMBCalc_SetPkFromCAMB
     procedure :: GetNLandRatios => CAMBCalc_GetNLandRatios
     !Overridden inherited
-    ! EFTCOSMOMC MOD START: modification needed to perform stability check
-    procedure :: CMBToCAMB => CAMBCalc_CMBToCAMB
-    ! EFTCOSMOMC MOD END.
     procedure :: ReadParams => CAMBCalc_ReadParams
     procedure :: InitForLikelihoods => CAMBCalc_InitForLikelihoods
     procedure :: BAO_D_v => CAMBCalc_BAO_D_v
@@ -98,9 +92,7 @@
     P%Reion%redshift= CMB%zre
     P%Reion%delta_redshift = CMB%zre_delta
     w_lam = CMB%w
-    ! EFTCOSMOMC MOD START: remove ppf
-    !wa_ppf = CMB%wa ! Original code
-    ! EFTCOSMOMC MOD END:
+    wa_ppf = CMB%wa
     ALens = CMB%ALens
     ALens_Fiducial = CMB%ALensf
     P%InitialConditionVector(initial_iso_CDM) = &
@@ -108,47 +100,7 @@
     P%Num_Nu_Massive = 0
     P%Nu_mass_numbers = 0
     P%Num_Nu_Massless = CMB%nnu
-
-    ! EFTCOSMOMC MOD START: pass to camb the EFT parameters
-    ! Background parameters:
-    P%EFTw0 = CMB%EFTw0
-    P%EFTwa = CMB%EFTwa
-    P%EFTwn = CMB%EFTwn
-    P%EFTwat= CMB%EFTwat
-    P%EFtw2 = CMB%EFtw2
-    P%EFTw3 = CMB%EFTw3
-    ! Pure EFT:
-    P%EFTOmega0   = CMB%EFTOmega0
-    P%EFTOmegaExp = CMB%EFTOmegaExp
-    P%EFTGamma10  = CMB%EFTGamma10
-    P%EFTGamma1Exp= CMB%EFTGamma1Exp
-    P%EFTGamma20  = CMB%EFTGamma20
-    P%EFTGamma2Exp= CMB%EFTGamma2Exp
-    P%EFTGamma30  = CMB%EFTGamma30
-    P%EFTGamma3Exp= CMB%EFTGamma3Exp
-    P%EFTGamma40  = CMB%EFTGamma40
-    P%EFTGamma4Exp= CMB%EFTGamma4Exp
-    P%EFTGamma50  = CMB%EFTGamma50
-    P%EFTGamma5Exp= CMB%EFTGamma5Exp
-    P%EFTGamma60  = CMB%EFTGamma60
-    P%EFTGamma6Exp= CMB%EFTGamma6Exp
-    ! Mapping EFT:
-    P%EFTB0 = CMB%EFTB0
-    ! RPH model:
-    P%RPHmassP0        = CMB%RPHmassP0
-    P%RPHmassPexp      = CMB%RPHmassPexp
-    P%RPHkineticity0   = CMB%RPHkineticity0
-    P%RPHkineticityexp = CMB%RPHkineticityexp
-    P%RPHbraiding0     = CMB%RPHbraiding0
-    P%RPHbraidingexp   = CMB%RPHbraidingexp
-    P%RPHtensor0       = CMB%RPHtensor0
-    P%RPHtensorexp     = CMB%RPHtensorexp
-    ! Horava model:
-    P%Horava_xi        = CMB%Horava_xi
-    P%Horava_lambda    = CMB%Horava_lambda
-    P%Horava_eta       = CMB%Horava_eta
-    ! EFTCOSMOMC MOD END.
-
+    P%share_delta_neff = .false.
     if (CMB%omnuh2>0) then
         P%Nu_mass_eigenstates=0
         if (CMB%omnuh2>CMB%omnuh2_sterile) then
@@ -180,7 +132,7 @@
 
     P%YHe = CMB%YHe
 #ifdef COSMOREC
-    if (P%Recomb%fdm/=0._mcp) P%Recomb%runmode = 3
+    if (CMB%fdm/=0._mcp) P%Recomb%runmode = 3
     P%Recomb%fdm = CMB%fdm * 1e-23_mcp
 #else
     if (CMB%fdm/=0._mcp) call MpiStop('Compile with CosmoRec to use fdm')
@@ -763,10 +715,6 @@
 
 
     subroutine CAMBCalc_InitCAMBParams(this,P)
-    ! EFTCOSMOMC MOD START: we need to use this to tell EFTCAMB that it's running from CosmoMC
-    use EFTdef
-    use compile_time_eft
-    ! EFTCOSMOMC MOD END.
     use lensing
     use ModelParams
     class(CAMB_Calculator) :: this
@@ -775,14 +723,10 @@
     !JD Changed P%Transfer%redshifts and P%Transfer%num_redshifts to
     !P%Transfer%PK_redshifts and P%Transfer%PK_num_redshifts respectively
     !for nonlinear lensing of CMB + LSS compatibility
-        Threadnum =num_threads
-        w_lam = -1
-
-        ! EFTCOSMOMC MOD START: remove ppf
-        !wa_ppf = 0._dl ! Original code
-        ! EFTCOSMOMC MOD END.
-
-        call CAMB_SetDefParams(P)
+    Threadnum =num_threads
+    w_lam = -1
+    wa_ppf = 0._dl
+    call CAMB_SetDefParams(P)
 
     HighAccuracyDefault = .true.
     P%OutputNormalization = outNone
@@ -802,69 +746,7 @@
     P%WantTransfer = CosmoSettings%Use_LSS .or. CosmoSettings%get_sigma8
     P%Transfer%k_per_logint=0
 
-    ! EFTCOSMOMC MOD START: pass model selection flag to the camb ! MR NEW
-
-    if ( .not. compile_time_eftcamb ) then
-
-        P%EFTflag = CosmoSettings%EFTflag
-
-        P%PureEFTmodelOmega  = CosmoSettings%PureEFTmodelOmega
-        P%PureEFTmodelGamma1 = CosmoSettings%PureEFTmodelGamma1
-        P%PureEFTmodelGamma2 = CosmoSettings%PureEFTmodelGamma2
-        P%PureEFTmodelGamma3 = CosmoSettings%PureEFTmodelGamma3
-        P%PureEFTmodelGamma4 = CosmoSettings%PureEFTmodelGamma4
-        P%PureEFTmodelGamma5 = CosmoSettings%PureEFTmodelGamma5
-        P%PureEFTmodelGamma6 = CosmoSettings%PureEFTmodelGamma6
-
-        P%DesignerEFTmodel = CosmoSettings%DesignerEFTmodel
-        P%AltParEFTmodel   = CosmoSettings%AltParEFTmodel
-        P%FullMappingEFTmodel = CosmoSettings%FullMappingEFTmodel
-
-        P%EFTwDE = CosmoSettings%EFTwDE
-        P%PureEFTHorndeski = CosmoSettings%PureEFTHorndeski
-        P%RPHmassPmodel      = CosmoSettings%RPHmassPmodel
-        P%RPHkineticitymodel = CosmoSettings%RPHkineticitymodel
-        P%RPHbraidingmodel   = CosmoSettings%RPHbraidingmodel
-        P%RPHtensormodel     = CosmoSettings%RPHtensormodel
-        P%HoravaSolarSystem  = CosmoSettings%HoravaSolarSystem
-
-    else if ( compile_time_eftcamb ) then
-
-        P%EFTflag = CT_EFTflag
-
-        P%PureEFTmodelOmega  = CT_PureEFTmodelOmega
-        P%PureEFTmodelGamma1 = CT_PureEFTmodelGamma1
-        P%PureEFTmodelGamma2 = CT_PureEFTmodelGamma2
-        P%PureEFTmodelGamma3 = CT_PureEFTmodelGamma3
-        P%PureEFTmodelGamma4 = CT_PureEFTmodelGamma4
-        P%PureEFTmodelGamma5 = CT_PureEFTmodelGamma5
-        P%PureEFTmodelGamma6 = CT_PureEFTmodelGamma6
-
-        P%DesignerEFTmodel    = CT_DesignerEFTmodel
-        P%AltParEFTmodel      = CT_AltParEFTmodel
-        P%FullMappingEFTmodel = CT_FullMappingEFTmodel
-
-        P%EFTwDE             = CT_EFTwDE
-        P%PureEFTHorndeski   = CT_PureEFTHorndeski
-        P%RPHmassPmodel      = CT_RPHmassPmodel
-        P%RPHkineticitymodel = CT_RPHkineticitymodel
-        P%RPHbraidingmodel   = CT_RPHbraidingmodel
-        P%RPHtensormodel     = CT_RPHtensormodel
-        P%HoravaSolarSystem  = CT_HoravaSolarSystem
-
-    end if
-
-    ! stability flags:
-    P%EFT_mathematical_stability = CosmoSettings%EFT_mathematical_stability
-    P%EFT_physical_stability     = CosmoSettings%EFT_physical_stability
-    P%EFTAdditionalPriors        = CosmoSettings%EFTAdditionalPriors
-    P%MinkowskyPriors            = CosmoSettings%MinkowskyPriors
-
-    EFTCAMBuseinCOSMOMC = 0
-
-    ! EFTCOSMOMC MOD END.
-
-        if (CosmoSettings%use_nonlinear) then
+    if (CosmoSettings%use_nonlinear) then
         P%NonLinear = NonLinear_pk
         P%Transfer%kmax = max(1.2_mcp,CosmoSettings%power_kmax)
     else

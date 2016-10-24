@@ -60,25 +60,6 @@
 
         logical :: bbn_consistency = .true. !JH
 
-        ! EFTCOSMOMC MOD START: store the values of the EFT model selection flags.
-        integer :: EFTflag
-        integer :: EFTwDE
-        integer :: PureEFTmodelOmega
-        integer :: PureEFTmodelGamma1, PureEFTmodelGamma2, PureEFTmodelGamma3
-        integer :: PureEFTmodelGamma4, PureEFTmodelGamma5, PureEFTmodelGamma6
-        integer :: DesignerEFTmodel
-        integer :: AltParEFTmodel
-        integer :: FullMappingEFTmodel
-        logical :: PureEFTHorndeski
-        integer :: RPHmassPmodel
-        integer :: RPHkineticitymodel
-        integer :: RPHbraidingmodel
-        integer :: RPHtensormodel
-        logical :: HoravaSolarSystem
-        ! definition of stability flags:
-        logical :: EFT_mathematical_stability, EFT_physical_stability, EFTAdditionalPriors, MinkowskyPriors
-        ! EFTCOSMOMC MOD END.
-
         integer :: num_massive_neutrinos = -1 !if >0, number of massive degenerate eigenstates
 
     end Type TCosmoTheoryParams
@@ -131,19 +112,6 @@
         real(mcp) YHe, nnu, iso_cdm_correlated, ALens, Alensf, fdm !fdm is dark matter annihilation, eg,. 0910.3663
         real(mcp) :: omnuh2_sterile = 0._mcp  !note omnhu2 is the sum of this + standard neutrinos
         real(mcp) reserved(5)
-
-        ! EFTCOSMOMC MOD START: add EFTCAMB parameters to CMBParams
-        real(mcp) :: EFTw0, EFTwa, EFTwn, EFTwat, EFtw2, EFTw3
-        real(mcp) :: EFTOmega0, EFTOmegaExp
-        real(mcp) :: EFTGamma10, EFTGamma1Exp, EFTGamma20, EFTGamma2Exp
-        real(mcp) :: EFTGamma30, EFTGamma3Exp, EFTGamma40, EFTGamma4Exp
-        real(mcp) :: EFTGamma50, EFTGamma5Exp, EFTGamma60, EFTGamma6Exp
-        real(mcp) :: EFTB0
-        real(mcp) :: RPHmassP0, RPHmassPexp, RPHkineticity0, RPHkineticityexp
-        real(mcp) :: RPHbraiding0, RPHbraidingexp, RPHtensor0, RPHtensorexp
-        real(mcp) :: Horava_xi, Horava_lambda, Horava_eta
-        ! EFTCOSMOMC MOD END.
-
     end Type CMBParams
 
     Type, extends(TParameterization) :: TCosmologyParameterization
@@ -215,37 +183,6 @@
     call Ini%Read('lmin_computed_cl',this%lmin_computed_cl)
     call Ini%Read('lmin_store_all_cmb',this%lmin_store_all_cmb)
     call Ini%Read('lmax_tensor',this%lmax_tensor)
-
-    ! EFTCOSMOMC MOD START: read the EFT model selection flags ! MR NEW
-    this%EFTflag = Ini%Read_Int('EFTflag',0)
-    this%EFTwDE = Ini%Read_Int('EFTwDE',0)
-    this%PureEFTmodelOmega  = Ini%Read_Int('PureEFTmodelOmega',0)
-    this%PureEFTmodelGamma1 = Ini%Read_Int('PureEFTmodelGamma1',0)
-    this%PureEFTmodelGamma2 = Ini%Read_Int('PureEFTmodelGamma2',0)
-    this%PureEFTmodelGamma3 = Ini%Read_Int('PureEFTmodelGamma3',0)
-    this%PureEFTmodelGamma4 = Ini%Read_Int('PureEFTmodelGamma4',0)
-    this%PureEFTmodelGamma5 = Ini%Read_Int('PureEFTmodelGamma5',0)
-    this%PureEFTmodelGamma6 = Ini%Read_Int('PureEFTmodelGamma6',0)
-
-    this%DesignerEFTmodel = Ini%Read_Int('DesignerEFTmodel',1)
-    this%AltParEFTmodel   = Ini%Read_Int('AltParEFTmodel',1)
-    this%FullMappingEFTmodel = Ini%Read_Int('FullMappingEFTmodel',1)
-
-    this%PureEFTHorndeski   = Ini%Read_Logical('PureEFTHorndeski',.false.)
-    this%HoravaSolarSystem  = Ini%Read_Logical('HoravaSolarSystem',.false.)
-
-    this%RPHmassPmodel      = Ini%Read_Int('RPHmassPmodel',0)
-    this%RPHkineticitymodel = Ini%Read_Int('RPHkineticitymodel',0)
-    this%RPHbraidingmodel   = Ini%Read_Int('RPHbraidingmodel',0)
-    this%RPHtensormodel     = Ini%Read_Int('RPHtensormodel',0)
-
-    ! read stability flags:
-    this%EFT_mathematical_stability = Ini%Read_Logical('EFT_mathematical_stability',.true.)
-    this%EFT_physical_stability     = Ini%Read_Logical('EFT_physical_stability',.true.)
-    this%EFTAdditionalPriors        = Ini%Read_Logical('EFTAdditionalPriors',.true.)
-    this%MinkowskyPriors            = Ini%Read_Logical('MinkowskyPriors',.true.)
-
-    ! EFTCOSMOMC MOD END.
 
     end subroutine TCosmoTheorySettings_ReadParams
 

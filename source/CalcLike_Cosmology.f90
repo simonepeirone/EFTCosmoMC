@@ -57,19 +57,9 @@
 
 
     logical function Cosmo_CalculateRequiredTheoryChanges(this)
-    ! EFTCOSMOMC MOD START: use the required modules
-    use EFTinitialization, only: EFTCAMB_initialization
-    use CAMB, only: CAMBparams, CAMBParams_Set
-    use ModelParams, only: feedbacklevel
-    ! EFTCOSMOMC MOD END.
     class(TCosmoLikeCalculator) :: this
     integer error
     Type(TTimer) :: Timer
-
-    ! EFTCOSMOMC MOD START: define
-    logical :: EFTsuccess
-    Type(CAMBParams) :: EFT_CP_Temp
-    ! EFTCOSMOMC MOD END.
 
     this%SlowChanged = any(this%changeMask(1:num_hard))
     this%SemiSlowchanged = any(this%changeMask(index_initpower:index_initpower+num_initpower-1))
@@ -82,20 +72,6 @@
         class is (CMBParams)
             if (CosmoSettings%Use_CMB .or. CosmoSettings%Use_LSS .or. CosmoSettings%get_sigma8) then
                 if (this%SlowChanged .or. this%SemiSlowchanged .and. .not. BaseParams%block_semi_fast) then
-                    ! EFTCOSMOMC MOD START: run the stability check for the choosen parameter.
-                    call this%CosmoCalc%CMBToCAMB(CMB,EFT_CP_Temp)
-                    call CAMBParams_Set(EFT_CP_Temp)
-                    ! Call EFTCAMB initialization
-
-                    if (EFT_CP_Temp%EFTflag/=0) then
-                        if (Feedback>2) feedbacklevel = 3
-                        call EFTCAMB_initialization(EFTsuccess)
-                        if (.not.EFTsuccess) then
-                            Cosmo_CalculateRequiredTheoryChanges = .false. 
-                            return
-                        end if
-                    end if
-                    ! EFTCOSMOMC MOD END.
                     this%slow_changes = this%slow_changes + 1
                     this%Params%validInfo = .false.
                     call this%CosmoCalc%GetNewTransferData(CMB, this%Params%Info,Theory, error)
@@ -105,24 +81,7 @@
                     call this%CosmoCalc%GetNewPowerData(CMB, this%Params%Info, Theory,error)
                 end if
             else
-                if (this%SlowChanged) then
-
-                    ! EFTCOSMOMC MOD START: run the stability check for the choosen parameter.
-                    call this%CosmoCalc%CMBToCAMB(CMB,EFT_CP_Temp)
-                    call CAMBParams_Set(EFT_CP_Temp)
-                    ! Call EFTCAMB initialization
-                    if (EFT_CP_Temp%EFTflag/=0) then
-                        if (Feedback>2) feedbacklevel = 3
-                        call EFTCAMB_initialization(EFTsuccess)
-                        if (.not.EFTsuccess) then
-                            Cosmo_CalculateRequiredTheoryChanges = .false. 
-                            return
-                        end if
-                    end if
-                    ! EFTCOSMOMC MOD END.
-
-                    call this%CosmoCalc%GetNewBackgroundData(CMB, Theory, error)
-                end if
+                if (this%SlowChanged) call this%CosmoCalc%GetNewBackgroundData(CMB, Theory, error)
             end if
         end select
     end select
