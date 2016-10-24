@@ -10,9 +10,13 @@ ifeq "$(ifortErr)" "0"
 #Intel compiler
 # For OSX replace shared by dynamiclib
 F90C     = ifort
-FFLAGS = -openmp -fast -W0 -WB -fpp2 -vec_report0
+# EFTCAMB MOD START: flags for the latest ifort
+#FFLAGS = -openmp -fast -W0 -WB -fpp2 -vec_report0
+#DEBUGFLAGS = -openmp -g -check all -check noarg_temp_created -traceback -fpp -fpe0
+FFLAGS = -qopenmp -O3 -W0 -WB -fpp -qopt-report=0
+DEBUGFLAGS = -qopenmp -mkl=parallel -fpp -g -qopt-report=0 -fp-stack-check -O0 -traceback -check all -check bounds -check uninit -check noarg_temp_created -DDEBUG
+# EFTCAMB MOD END.
 SFFLAGS = -shared -fpic
-DEBUGFLAGS = -openmp -g -check all -check noarg_temp_created -traceback -fpp -fpe0
 ## This is flag is passed to the Fortran compiler allowing it to link C++ if required (not usually):
 F90CRLINK = -cxxlib
 MODOUT = -module $(OUTPUT_DIR)
@@ -30,8 +34,8 @@ ifeq "$(gfortErr)" "0"
 F90C     = gfortran
 SFFLAGS =  -shared -fPIC
 
-FFLAGS =  -O3 -fopenmp -ffast-math -fmax-errors=4
-DEBUGFLAGS = -cpp -g -fbounds-check -fbacktrace -ffree-line-length-none -fmax-errors=4 -ffpe-trap=invalid,overflow,zero
+FFLAGS =  -O3 -fopenmp -ffast-math -fmax-errors=4 -ffree-line-length-none -funroll-loops -cpp -ffpe-summary=none
+DEBUGFLAGS = -cpp -g -fbounds-check -fbacktrace -ffree-line-length-none -fmax-errors=4 -ffpe-trap=invalid,overflow,zero -DDEBUG
 MODOUT =  -J$(OUTPUT_DIR)
 SMODOUT = -J$(DLL_DIR)
 

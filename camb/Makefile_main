@@ -1,6 +1,11 @@
-
 #Files containing evolution equations initial power spectrum module
-EQUATIONS     ?= equations
+
+# EFTCAMB MOD START: use equations EFT
+EQUATIONS     ?= equations_EFT
+# original code:
+# EQUATIONS     ?= equations
+# EFTCAMB MOD END.
+
 POWERSPECTRUM ?= power_tilt
 REIONIZATION ?= reionization
 RECOMBINATION ?= recfast
@@ -19,17 +24,14 @@ DRIVER        ?= inidriver.F90
 Release: OUTPUT_DIR = Release
 Debug: OUTPUT_DIR = Debug
 
-Release: PYCAMB_OUTPUT_DIR = pycamb/camb
 Release: DLL_DIR = Releaselib
 Debug: DLL_DIR = Debuglib
 
 OUTPUT_DIR ?= Release
-PYCAMB_OUTPUT_DIR ?= pycamb/camb
 DLL_DIR ?= Releaselib
 
 Release: camb camblib.so
 Debug: camb camblib.so
-
 
 CAMBLIB       = $(OUTPUT_DIR)/libcamb_$(RECOMBINATION).a
 
@@ -52,6 +54,17 @@ CAMBSO       =  $(DLL_DIR)/constants.o  $(DLL_DIR)/utils.o $(EXTCAMBFILES)  $(DL
 	$(DLL_DIR)/$(REIONIZATION).o $(DLL_DIR)/modules.o $(DLL_DIR)/bessels.o $(DLL_DIR)/$(EQUATIONS).o \
 	$(DLL_DIR)/$(NONLINEAR).o $(DLL_DIR)/lensing.o $(DLL_DIR)/$(BISPECTRUM).o $(DLL_DIR)/cmbmain.o \
 	$(DLL_DIR)/camb.o $(DLL_DIR)/camb_python.o
+	
+# EFTCAMB MOD START: build system
+
+# get the EFTCAMB directory:
+CAMB_DIR=$(abspath .)
+EFTCAMB_DIR=$(abspath .)/eftcamb
+EFTCAMB_APPS=$(abspath .)/eftcamb_apps
+# include EFTCAMB make file:
+include $(EFTCAMB_DIR)/eftcamb_build.make
+
+# EFTCAMB MOD END.
 
 F90CRLINK ?= -lstdc++
 
@@ -110,7 +123,6 @@ $(DLL_DIR)/camb_python.o: $(DLL_DIR)/camb.o
 
 camblib.so: folders $(CAMBSO)
 	$(F90C) $(SF90FLAGS) $(CAMBSO) -o $(DLL_DIR)/camblib.so
-	cp $(DLL_DIR)/camblib.so $(PYCAMB_OUTPUT_DIR)
 
 camb: directories $(CAMBOBJ) $(DRIVER)
 	$(F90C) $(F90FLAGS) $(CAMBOBJ) $(DRIVER) $(F90CRLINK) -o $@
@@ -143,7 +155,7 @@ directories:
 
 clean:
 	rm -f *.o *.a *.d core *.mod $(DLL_DIR)/*.o $(DLL_DIR)/*.mod
-	rm -f *.o *.a *.d core *.mod $(OUTPUT_DIR)/*.o $(OUTPUT_DIR)/*.mod $(PYCAMB_OUTPUT_DIR)/*.so
+	rm -f *.o *.a *.d core *.mod $(OUTPUT_DIR)/*.o $(OUTPUT_DIR)/*.mod
 	rm -rf Release*
 	rm -rf Debug*
 
