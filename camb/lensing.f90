@@ -212,9 +212,7 @@
         if (Cphil3(10) > 1e-7) then
             write (*,*) 'You need to normalize realistically to use lensing.'
             write (*,*) 'see http://cosmocoffee.info/viewtopic.php?t=94'
-            ! EFTCAMB MOD START: some theories really destroy the Cls
-            !call MpiStop()
-            ! EFTCAMB MOD END.
+            call MpiStop()
         end if
         if (lmax > CP%Max_l) then
             l=CP%Max_l
@@ -230,9 +228,7 @@
                 CEE(l) =  highL_CL_template(l, C_E)*fac2 *sc
                 CTE(l) =  highL_CL_template(l, C_Cross)*fac2*sc
                 if (Cphil3(CP%Max_l+1) > 1e-7) then
-                    ! EFTCAMB MOD START: some theories really destroy the Cls
-                    !call MpiStop('You need to normalize the high-L template so it is dimensionless')
-                    ! EFTCAMB MOD END.
+                    call MpiStop('You need to normalize the high-L template so it is dimensionless')
                 end if
             end do
         end if
@@ -581,9 +577,7 @@
         if (Cphil3(10) > 1e-7) then
             write (*,*) 'You need to normalize realistically to use lensing.'
             write (*,*) 'see http://cosmocoffee.info/viewtopic.php?t=94'
-            ! EFTCAMB MOD START: some theories really destroy the Cls
-            ! call MpiStop()
-            ! EFTCAMB MOD END.
+            call MpiStop()
         end if
 
         lens_contrib=0

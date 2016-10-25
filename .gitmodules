@@ -1,0 +1,4 @@
+[submodule "EFTCAMB"]
+	path = EFTCAMB
+	url = https://github.com/EFTCAMB/EFTCAMB.git
+	branch = new_features

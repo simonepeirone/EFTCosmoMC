@@ -46,7 +46,7 @@ endif
 
 else
 #gfortran 5.x and earlier will not work (many F2003 bugs)
-#gfortran 6 should work (though currently still buggy for debug compile); 
+#gfortran 6 should work (though currently still buggy for debug compile);
 #see CosmoBox virtual machines for stable environments
 F90C = gfortran
 FFLAGS = -cpp -O3 -ffast-math -ffree-line-length-none -fopenmp -fmax-errors=4
@@ -305,14 +305,15 @@ cleancosmomc:
 getdist: directories $(DISTFILES)
 	$(F90C) -o ../getdist $(DISTFILES) $(LAPACKL) $(GETDISTFLAGS)
 
+# EFTCAMB MOD START: use equations EFT
 camb:
 	cd ../camb && \
 	$(MAKE) --file=Makefile_main libcamb OUTPUT_DIR=$(OUTPUT_DIR) \
-	RECOMBINATION=$(RECOMBINATION) EQUATIONS=equations_ppf NONLINEAR=halofit_ppf
+	RECOMBINATION=$(RECOMBINATION) EQUATIONS=equations_EFT NONLINEAR=halofit_ppf
+# EFTCAMB MOD END.
 
 $(highL)/libhigh.a:
 	cd $(highL); make libhigh.a;
 
 $(WMAP)/libwmap9.a:
 	cd $(WMAP); make libwmap9.a;
-
